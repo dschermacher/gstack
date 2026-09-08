@@ -1,0 +1,293 @@
+<!-- Quelle für leitfaden.pdf. Rendern:
+     chromium --headless --no-pdf-header-footer --print-to-pdf=<name>.pdf file://$PWD/leitfaden.html -->
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Gespraechsleitfaden</title>
+<style>
+  @page { size: A4; margin: 16mm 16mm 14mm 16mm; }
+  :root {
+    --ink: #1c1a18; --ink-soft: #4a453f; --accent: #a04f28;
+    --accent-soft: #f6efe9; --rule: #ddd5cd; --line: #c9c0b7;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Bitstream Charter", "Liberation Serif", Georgia, serif;
+    font-size: 10pt; line-height: 1.45; color: var(--ink); margin: 0; hyphens: auto;
+  }
+  .eyebrow {
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 7.5pt;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+    font-weight: 700; margin: 0 0 4mm 0;
+  }
+  h1 {
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 22pt;
+    line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; margin: 0 0 3mm 0;
+  }
+  .standfirst { font-size: 11pt; line-height: 1.45; color: var(--ink-soft); margin: 0 0 5mm 0; max-width: 150mm; }
+  .meta {
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; color: var(--ink-soft);
+    border-top: 1.6pt solid var(--accent); padding-top: 2mm; margin-bottom: 6mm;
+  }
+  h2 {
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 11.5pt; font-weight: 700;
+    margin: 7mm 0 2.5mm 0; padding-bottom: 1.2mm; border-bottom: 0.6pt solid var(--rule);
+    break-after: avoid;
+  }
+  h2 .num { color: var(--accent); margin-right: 2.5mm; }
+  h3 {
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 9.6pt; font-weight: 700;
+    margin: 4mm 0 1.2mm 0; break-after: avoid;
+  }
+  p { margin: 0 0 2.5mm 0; }
+  ul, ol { margin: 0 0 2.5mm 0; padding-left: 5mm; }
+  li { margin-bottom: 1.2mm; }
+  li::marker { color: var(--accent); }
+
+  /* Frage mit Schreibzeile */
+  .q { margin: 0 0 4mm 0; break-inside: avoid; }
+  .q .ask { display: block; margin-bottom: 1mm; }
+  .q .ask b { font-weight: 700; }
+  .q .why {
+    font-size: 8.6pt; color: var(--ink-soft); font-style: italic;
+    display: block; margin-bottom: 1.5mm;
+  }
+  .lines { border-bottom: 0.5pt solid var(--line); height: 5mm; margin-bottom: 1.5mm; }
+  .lines.two { height: 5mm; }
+
+  .box {
+    background: var(--accent-soft); padding: 4mm 5mm 3mm 5mm; margin: 4mm 0; break-inside: avoid;
+  }
+  .box h3 { margin-top: 0; color: var(--accent); }
+  .box p:last-child, .box ul:last-child { margin-bottom: 0; }
+
+  .say {
+    border-left: 2pt solid var(--accent); padding: 1mm 0 1mm 4mm; margin: 3mm 0;
+    font-size: 10.4pt; break-inside: avoid;
+  }
+  .say p { margin-bottom: 1.5mm; }
+  .say p:last-child { margin-bottom: 0; }
+
+  .warn { border-left: 2pt solid #8a8580; padding: 0.5mm 0 0.5mm 4mm; margin: 3mm 0; break-inside: avoid; }
+  .warn p:last-child { margin-bottom: 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 9.4pt; margin: 3mm 0; }
+  th {
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 7.6pt; letter-spacing: 0.08em;
+    text-transform: uppercase; text-align: left; color: var(--ink-soft);
+    border-bottom: 1pt solid var(--ink); padding: 0 3mm 1.2mm 0; font-weight: 700;
+  }
+  td { padding: 2mm 3mm 2mm 0; border-bottom: 0.5pt solid var(--rule); vertical-align: top; }
+  td:first-child { font-family: "Liberation Sans", Arial, sans-serif; font-weight: 700; white-space: nowrap; }
+  tr { break-inside: avoid; }
+  .g { color: #2f6b3a; } .y { color: #9a7b1f; } .r { color: #9c3226; }
+
+  .calc {
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 9.6pt;
+    background: #fff; border: 0.8pt solid var(--accent); padding: 4mm 5mm; margin: 4mm 0;
+    break-inside: avoid;
+  }
+  .calc .row { display: flex; justify-content: space-between; padding: 1.6mm 0; border-bottom: 0.4pt dotted var(--line); }
+  .calc .row:last-child { border-bottom: none; border-top: 1pt solid var(--accent); margin-top: 1mm; font-weight: 700; }
+  .calc .row span:last-child { min-width: 30mm; border-bottom: 0.5pt solid var(--line); text-align: right; }
+  .footer {
+    margin-top: 7mm; padding-top: 2.5mm; border-top: 0.6pt solid var(--rule);
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 7.8pt; color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<p class="eyebrow">Gespr&auml;chsleitfaden &middot; erstes Kundengespr&auml;ch</p>
+<h1>Die halbe Stunde,<br>die alles entscheidet</h1>
+<p class="standfirst">Ziel dieses Gespr&auml;chs sind <strong>Zahlen, keine Meinungen.</strong>
+Am Ende sollst du einen Eurobetrag auf dem Papier haben &mdash; und der ist dein Preis.</p>
+<div class="meta">Zum Mitnehmen. Antworten direkt reinschreiben.</div>
+
+<div class="box">
+  <h3>Drei Regeln, bevor du losf&auml;hrst</h3>
+  <ul>
+    <li><strong>Du verkaufst nichts.</strong> Kein Wort &uuml;ber das System, solange du fragst.
+    Sobald er wei&szlig;, was du bauen willst, gibt er dir h&ouml;fliche Antworten statt echter.</li>
+    <li><strong>Du schreibst mit.</strong> Sichtbar, auf Papier. Das signalisiert: das hier ist ernst,
+    und es zwingt dich, nicht zu reden.</li>
+    <li><strong>Bei &bdquo;das w&auml;r ja praktisch&ldquo; freust du dich nicht.</strong> Du fragst nach:
+    &bdquo;Wann hat dich das letzte Mal konkret Geld gekostet?&ldquo; Begeisterung ist gratis, Zahlen nicht.</li>
+  </ul>
+</div>
+
+<h2><span class="num">A</span>Wie es heute wirklich l&auml;uft</h2>
+
+<div class="q">
+  <span class="ask"><b>Erz&auml;hl mir mal, was bei dir passiert, wenn jemand anruft und ein Angebot will.
+  Von dem Anruf bis das Angebot raus ist &mdash; Schritt f&uuml;r Schritt.</b></span>
+  <span class="why">Lass ihn reden. Nicht unterbrechen. Hier erf&auml;hrst du, wo die Zeit versickert.</span>
+  <div class="lines"></div><div class="lines"></div><div class="lines"></div>
+</div>
+
+<div class="q">
+  <span class="ask"><b>Wie lange dauert das insgesamt? Und wann machst du es &mdash; abends, sonntags,
+  zwischen zwei Baustellen?</b></span>
+  <div class="lines"></div><div class="lines"></div>
+</div>
+
+<div class="q">
+  <span class="ask"><b>Womit rechnest du? Zettel, Excel, Word &mdash; oder hast du ein Programm?</b></span>
+  <span class="why">Falls Programm: welches, was kostet es, und was kann es nicht?
+  Das ist dein echter Wettbewerber &mdash; oder dein Preisanker.</span>
+  <div class="lines"></div><div class="lines"></div>
+</div>
+
+<div class="q">
+  <span class="ask"><b>Machst du das alles selbst, oder hast du jemanden im B&uuml;ro?</b></span>
+  <div class="lines"></div>
+</div>
+
+<h2><span class="num">B</span>Was die L&uuml;cke kostet &mdash; die Zahlen</h2>
+
+<p>Das ist der wichtigste Block. Hier entsteht dein Preis. Frag ruhig zweimal nach,
+wenn er sch&auml;tzt &mdash; eine ungenaue Zahl ist besser als keine.</p>
+
+<div class="q">
+  <span class="ask"><b>Wie viele Anfragen hattest du letztes Jahr etwa? Grob gesch&auml;tzt.</b></span>
+  <div class="lines"></div>
+</div>
+
+<div class="q">
+  <span class="ask"><b>Und wie viele davon hast du gar nicht beantwortet &mdash; oder so sp&auml;t,
+  dass der Kunde schon weg war?</b></span>
+  <span class="why">Das ist die Kernzahl des ganzen Gespr&auml;chs. Wenn er hier z&ouml;gert,
+  frag anders: &bdquo;Wann hast du das letzte Mal eine Anfrage einfach liegen lassen?&ldquo;</span>
+  <div class="lines"></div>
+</div>
+
+<div class="q">
+  <span class="ask"><b>Was ist ein normaler Auftrag bei dir wert? Was bleibt dir davon?</b></span>
+  <div class="lines"></div>
+</div>
+
+<div class="q">
+  <span class="ask"><b>Erz&auml;hl mir vom letzten Auftrag, den ein anderer bekommen hat,
+  weil er schneller war.</b></span>
+  <span class="why">Eine Geschichte ist mehr wert als eine Zahl. Wenn er eine erz&auml;hlt und dabei
+  sauer wird, hast du deinen Beweis.</span>
+  <div class="lines"></div><div class="lines"></div><div class="lines"></div>
+</div>
+
+<div class="calc">
+  <div class="row"><span>Verlorene Anfragen im Jahr</span><span>&nbsp;</span></div>
+  <div class="row"><span>&times; Auftragswert (Deckungsbeitrag)</span><span>&nbsp;</span></div>
+  <div class="row"><span>= entgangener Gewinn pro Jahr</span><span>&nbsp;</span></div>
+  <div class="row"><span>davon 10 &ndash; 20 % = dein Jahrespreis</span><span>&nbsp;</span></div>
+</div>
+
+<p><strong>Wichtig:</strong> Diese Rechnung machst du <em>nach</em> dem Gespr&auml;ch, allein im Auto.
+Nicht vor ihm. Sonst wird es eine Verhandlung, bevor du das Angebot &uuml;berhaupt geschnitten hast.</p>
+
+<h2><span class="num">C</span>Die eine Frage, die du nicht vergessen darfst</h2>
+
+<div class="q">
+  <span class="ask"><b>Stell dir vor, du h&auml;ttest ab n&auml;chstem Monat jeden Sonntag frei.
+  Was machst du damit?</b></span>
+  <span class="why">Diese Antwort entscheidet, ob er zahlt &mdash; und aus welcher Tasche.</span>
+  <div class="lines"></div><div class="lines"></div>
+</div>
+
+<table>
+  <thead><tr><th style="width:38mm">Wenn er sagt</th><th>Was das bedeutet</th></tr></thead>
+  <tbody>
+    <tr><td class="g">&bdquo;Noch einen<br>Auftrag annehmen&ldquo;</td>
+        <td><strong>Bestlage.</strong> Zeit wird bei ihm zu Geld. Er zahlt aus der Betriebskasse,
+        und er rechnet selbst, dass sich das lohnt. Preis nach oben.</td></tr>
+    <tr><td class="y">&bdquo;Endlich mal Zeit<br>f&uuml;r die Familie&ldquo;</td>
+        <td><strong>Ehrlich, aber schwierig.</strong> Er zahlt es aus der privaten Tasche, und die ist
+        eng. Dann brauchst du zwingend auch das Geld-Argument aus Block&nbsp;B, sonst tr&auml;gt es den Preis nicht.</td></tr>
+    <tr><td class="r">&bdquo;Wei&szlig; ich nicht&ldquo; /<br>&bdquo;Anderes liegt auch&ldquo;</td>
+        <td><strong>Warnsignal.</strong> Er merkt den Gewinn nicht und k&uuml;ndigt nach ein paar Monaten.
+        Dann verkauf nicht Zeit, sondern gewonnene Auftr&auml;ge.</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="num">D</span>Was du mitnehmen willst</h2>
+
+<p>Frag am Ende, ob er dir das mitgibt. Es ist der Rohstoff f&uuml;r alles Weitere:</p>
+<ul>
+  <li><strong>Drei bis f&uuml;nf alte Angebote</strong> &mdash; gewonnene und verlorene.</li>
+  <li><strong>Zwei bis drei Schlussrechnungen</strong> zu Projekten, wo er wei&szlig;, wie lange es wirklich dauerte.</li>
+  <li><strong>Fotos von seinen Aufma&szlig;zetteln</strong> &mdash; die echten, krakeligen. Am besten f&auml;ngst du gleich
+  seinen Block ab und fotografierst zwei Seiten.</li>
+  <li><strong>Stundens&auml;tze, Materialaufschlag, Fahrtkosten, Zuschl&auml;ge.</strong></li>
+  <li><strong>Steuerberater:</strong> welches Programm, und wie gibt er die Belege ab?</li>
+</ul>
+
+<div class="q">
+  <span class="ask"><b>Nebenfrage, die viel verr&auml;t:</b> Wann hat dich dein Steuerberater das letzte Mal
+  gemahnt, und wegen was?</span>
+  <div class="lines"></div>
+</div>
+
+<h2><span class="num">E</span>Das Geldgespr&auml;ch</h2>
+
+<p>Erst jetzt. Und genau so &mdash; du kannst es fast w&ouml;rtlich sagen:</p>
+
+<div class="say">
+  <p>&bdquo;Ich bau dir das. Den Aufbau mach ich umsonst, weil du der Erste bist und ich daran lerne.
+  Das ist mir was wert.</p>
+  <p>Wenn es l&auml;uft und du sagst, es nimmt dir wirklich Arbeit ab, dann kostet es ab da X im Monat.
+  Wenn es dir nichts bringt, h&ouml;rst du auf und es hat dich nichts gekostet.</p>
+  <p>Ist das fair?&ldquo;</p>
+</div>
+
+<p><strong>Warum so:</strong> Du schenkst ihm den Aufbau, nicht den Preis. Ein Freundschaftspreis w&auml;re
+das Schlimmste, was du machen kannst &mdash; aus einem Gefallen wird nie ein Gesch&auml;ft, weil du den
+sp&auml;teren echten Preis nie mehr durchsetzt. Er erinnert sich an die erste Zahl. F&uuml;r immer.</p>
+
+<div class="warn">
+  <p><strong>Und jetzt aufpassen, nicht auf die Worte:</strong> Nachdem du die Zahl gesagt hast,
+  h&ouml;r auf zu reden. Wenn er nachfragt, wie das abgerechnet wird, oder ab wann, oder ob er k&uuml;ndigen
+  kann &mdash; sehr gut, er rechnet. Wenn er &bdquo;ja, passt&ldquo; sagt und sofort das Thema wechselt,
+  hat er nicht zugeh&ouml;rt. Dann ist es noch ein Gefallen und keine Abmachung.</p>
+</div>
+
+<h2><span class="num">F</span>Was du auf keinen Fall machst</h2>
+
+<ul>
+  <li><strong>Das System vorf&uuml;hren, bevor du gefragt hast.</strong> Danach sind seine Antworten wertlos &mdash;
+  er beschreibt dann dein Produkt, nicht seinen Alltag.</li>
+  <li><strong>Ihm die Antworten in den Mund legen.</strong> &bdquo;Das nervt bestimmt, oder?&ldquo; ist keine Frage,
+  das ist eine Vorlage zum Nicken.</li>
+  <li><strong>Funktionen versprechen.</strong> Alles, was du im Gespr&auml;ch zusagst, ist sp&auml;ter geschuldet.</li>
+  <li><strong>Das Papier hierlassen.</strong> Dieses Blatt bleibt bei dir. Was du ihm gibst, ist die
+  Systemvorstellung &mdash; und die gibst du ihm <em>am Ende</em>, nicht am Anfang.</li>
+</ul>
+
+<h2><span class="num">G</span>Hinterher, im Auto: Ampel ziehen</h2>
+
+<table>
+  <thead><tr><th style="width:20mm">Ergebnis</th><th>Woran du es erkennst</th><th style="width:44mm">Was du tust</th></tr></thead>
+  <tbody>
+    <tr><td class="g">Gr&uuml;n</td>
+        <td>Er nennt eine Zahl verlorener Anfragen. Er erz&auml;hlt eine Geschichte und wird dabei sauer.
+        Er fragt selbst, wann es losgeht. Er gibt dir die Unterlagen sofort mit.</td>
+        <td>Bauen. Phase&nbsp;1 starten, Preis aus Block&nbsp;B ansetzen.</td></tr>
+    <tr><td class="y">Gelb</td>
+        <td>Er beklagt sich, aber ohne Zahlen. Oder er hat ein Programm und ist eigentlich zufrieden.
+        Oder die Unterlagen kommen &bdquo;irgendwann&ldquo;.</td>
+        <td>Klein anfangen: nur die Baustellenaufnahme, ein einziges Projekt, zwei Wochen.
+        Kein Preisgespr&auml;ch, bis das l&auml;uft.</td></tr>
+    <tr><td class="r">Rot</td>
+        <td>Es st&ouml;rt ihn nicht wirklich. Die B&uuml;rokraft macht das. Er wechselt das Thema.</td>
+        <td>Nicht f&uuml;r ihn bauen. Zwei andere Handwerksmeister fragen, mit demselben Bogen.
+        Er ist nicht dein Kunde &mdash; jemand anderes ist es.</td></tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  Nicht beim Kunden lassen. Nach dem Gespr&auml;ch die Rechnung aus Block&nbsp;B ausf&uuml;llen,
+  dann die Ampel ziehen.
+</div>
+
+</body>
+</html>
