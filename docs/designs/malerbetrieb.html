@@ -1,0 +1,468 @@
+<!-- Quelle für malerbetrieb.pdf. Rendern:
+     chromium --headless --no-pdf-header-footer --print-to-pdf=<name>.pdf file://$PWD/malerbetrieb.html -->
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Dein Betriebssystem</title>
+<style>
+  @page { size: A4; margin: 20mm 18mm 18mm 18mm; }
+
+  :root {
+    --ink: #1c1a18;
+    --ink-soft: #4a453f;
+    --accent: #a04f28;
+    --accent-soft: #f6efe9;
+    --rule: #ddd5cd;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    font-family: "Bitstream Charter", "Liberation Serif", Georgia, serif;
+    font-size: 10.6pt;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    hyphens: auto;
+  }
+
+  /* ---------- Kopf ---------- */
+  .eyebrow {
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-size: 7.8pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 6mm 0;
+  }
+
+  h1 {
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-size: 25pt;
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0 0 4mm 0;
+  }
+
+  .standfirst {
+    font-size: 12.2pt;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 7mm 0;
+    max-width: 145mm;
+  }
+
+  .meta {
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-size: 8.2pt;
+    color: var(--ink-soft);
+    border-top: 1.6pt solid var(--accent);
+    padding-top: 2.5mm;
+    margin-bottom: 9mm;
+  }
+
+  /* ---------- Abschnitte ---------- */
+  h2 {
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-size: 13pt;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 9mm 0 3mm 0;
+    padding-bottom: 1.5mm;
+    border-bottom: 0.6pt solid var(--rule);
+    break-after: avoid;
+  }
+  h2 .num {
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    margin-right: 2.5mm;
+  }
+
+  h3 {
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-size: 10.4pt;
+    font-weight: 700;
+    margin: 5mm 0 1.5mm 0;
+    break-after: avoid;
+  }
+
+  p { margin: 0 0 3mm 0; }
+  p.lead { font-size: 11.2pt; color: var(--ink-soft); }
+
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+
+  ul, ol { margin: 0 0 3mm 0; padding-left: 5.5mm; }
+  li { margin-bottom: 1.6mm; }
+  li::marker { color: var(--accent); }
+
+  /* ---------- Bausteine ---------- */
+  .blocks { margin: 4mm 0 2mm 0; }
+  .block {
+    display: flex;
+    gap: 5mm;
+    padding: 3.5mm 0;
+    border-top: 0.6pt solid var(--rule);
+    break-inside: avoid;
+  }
+  .block:last-child { border-bottom: 0.6pt solid var(--rule); }
+  .block .n {
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    width: 10mm;
+    flex-shrink: 0;
+    padding-top: 0.5mm;
+  }
+  .block .body { flex: 1; }
+  .block .body h3 { margin-top: 0; margin-bottom: 1mm; }
+  .block .body p { margin-bottom: 0; color: var(--ink-soft); }
+
+  /* ---------- Ablauf ---------- */
+  .flow {
+    background: var(--accent-soft);
+    padding: 5mm 6mm 4mm 6mm;
+    margin: 4mm 0;
+    break-inside: avoid;
+  }
+  .flow h3 { margin-top: 0; color: var(--accent); }
+  .flow ol { padding-left: 5mm; margin-bottom: 0; }
+  .flow li { margin-bottom: 2mm; }
+  .flow .when {
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1.5mm;
+  }
+
+  /* ---------- Tabelle ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.8pt;
+    margin: 3mm 0 3mm 0;
+  }
+  th {
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--ink-soft);
+    border-bottom: 1pt solid var(--ink);
+    padding: 0 3mm 1.5mm 0;
+    font-weight: 700;
+  }
+  td {
+    padding: 2.2mm 3mm 2.2mm 0;
+    border-bottom: 0.5pt solid var(--rule);
+    vertical-align: top;
+  }
+  td:first-child {
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--accent);
+  }
+  tr { break-inside: avoid; }
+
+  /* ---------- Checkliste ---------- */
+  .check { list-style: none; padding-left: 0; }
+  .check li {
+    position: relative;
+    padding-left: 7mm;
+    margin-bottom: 2.4mm;
+    break-inside: avoid;
+  }
+  .check li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.1mm;
+    width: 3.6mm;
+    height: 3.6mm;
+    border: 0.8pt solid var(--accent);
+  }
+
+  /* ---------- Hinweiskasten ---------- */
+  .note {
+    border-left: 2pt solid var(--accent);
+    padding: 0.5mm 0 0.5mm 4mm;
+    margin: 4mm 0;
+    break-inside: avoid;
+  }
+  .note p:last-child { margin-bottom: 0; }
+
+  .pull {
+    font-size: 12.4pt;
+    line-height: 1.45;
+    color: var(--accent);
+    font-style: italic;
+    margin: 5mm 0;
+    padding-left: 5mm;
+    border-left: 2pt solid var(--accent);
+    break-inside: avoid;
+  }
+
+  .footer {
+    margin-top: 10mm;
+    padding-top: 3mm;
+    border-top: 0.6pt solid var(--rule);
+    font-family: "Liberation Sans", Arial, sans-serif;
+    font-size: 8pt;
+    color: var(--ink-soft);
+  }
+
+  .pb { break-before: page; }
+</style>
+</head>
+<body>
+
+<p class="eyebrow">Vorschlag &middot; Malerbetrieb</p>
+
+<h1>Dein Betriebssystem</h1>
+
+<p class="standfirst">Ein System, das deine Angebote kalkuliert, deine Baustellen
+aufnimmt und deine Belege sortiert &mdash; und das mit jedem Auftrag besser wird,
+weil es aus deinen eigenen Zahlen lernt.</p>
+
+<div class="meta">Entwurf zur Besprechung &middot; noch kein Angebot &middot; Stand September 2026</div>
+
+<h2><span class="num">1</span>Worum es geht</h2>
+
+<p class="lead">Du verdienst dein Geld mit Malen. Nicht mit Angeboten schreiben,
+nicht mit Belege sortieren, nicht mit Aufmaß abtippen.</p>
+
+<p>Trotzdem geht genau dafür deine Zeit drauf &mdash; abends, am Wochenende, in der
+Zeit, in der eigentlich Feierabend wäre. Und das kostet dich nicht nur Nerven,
+es kostet dich Geld: eine Anfrage, die zwei Wochen liegt, ist meistens weg.
+Der Kunde hat inzwischen jemand anderen genommen.</p>
+
+<p>Der Vorschlag ist kein Programm, das du kaufst und dann selber bedienen musst.
+Es ist ein System, das auf <strong>deine</strong> Art zu arbeiten zugeschnitten
+wird &mdash; auf deine Preise, deine Leistungen, deine Formulierungen, deine
+Erfahrungswerte. Und das den Papierkram übernimmt, nicht dich damit beschäftigt.</p>
+
+<h2><span class="num">2</span>Die vier Bausteine</h2>
+
+<div class="blocks">
+
+  <div class="block">
+    <div class="n">1</div>
+    <div class="body">
+      <h3>Baustellenaufnahme</h3>
+      <p>Du fährst raus, nimmst das Objekt einmal auf &mdash; und danach steht das
+      Projekt vollständig im System. Mit Maßen, Fotos, Untergründen, Kundenwünschen
+      und allem, was beim Ortstermin besprochen wurde. Auch in drei Wochen noch,
+      wenn du es nicht mehr genau im Kopf hast.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="n">2</div>
+    <div class="body">
+      <h3>Angebot kalkulieren</h3>
+      <p>Aus der Aufnahme entsteht das Angebot &mdash; mit deinen Positionen, deinen
+      Aufwandswerten, deinen Preisen. Nicht mit Durchschnittszahlen aus dem Internet.
+      Du prüfst, korrigierst wo nötig, und schickst raus. Aus zwei Abenden werden
+      zwanzig Minuten.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="n">3</div>
+    <div class="body">
+      <h3>Nachkalkulation</h3>
+      <p>Nach dem Auftrag vergleicht das System, was du kalkuliert hattest, mit dem,
+      was es wirklich gekostet hat. Nach zwanzig Projekten weiß es, wo du dich
+      regelmäßig verschätzt &mdash; und rechnet von da an genauer als du im Kopf.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="n">4</div>
+    <div class="body">
+      <h3>Belege und Buchhaltung</h3>
+      <p>Rechnung fotografieren, fertig. Betrag, Datum, Lieferant werden gelesen, dem
+      richtigen Projekt zugeordnet, sauber benannt und abgelegt. Am Monatsende liegt
+      ein fertiges Paket für deinen Steuerberater bereit.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="pull">Der Punkt ist nicht, dass alles digital wird. Der Punkt ist, dass
+du abends nichts mehr abtippen musst.</p>
+
+<h2><span class="num">3</span>Wie das im Alltag aussieht</h2>
+
+<p>Das Wichtigste zuerst: <strong>du musst dich nicht umstellen.</strong> Ein System,
+das dir auf der Baustelle Tipparbeit abverlangt, benutzt kein Mensch. Deswegen ist
+es genau umgekehrt gebaut &mdash; du arbeitest wie immer, das System passt sich an.</p>
+
+<div class="flow">
+  <h3><span class="when">Auf der Baustelle &mdash; etwa zwei Minuten</span></h3>
+  <ol>
+    <li><strong>Du schreibst dein Aufmaß auf deinen Zettel, wie immer.</strong> Und
+    fotografierst ihn dann mit dem Handy. Das System kann deine Handschrift lesen
+    und die Maße übernehmen. Kein Formular, keine App, die du auf der Leiter
+    bedienen musst.</li>
+    <li><strong>Fotos von den Räumen</strong> &mdash; Untergrund, Schäden, Besonderheiten.
+    Einfach fotografieren, der Rest passiert später automatisch.</li>
+    <li><strong>Was man nicht sieht, sprichst du ein.</strong> Zugang, Kundenwünsche,
+    &bdquo;Treppenhaus nur am Wochenende&ldquo;, &bdquo;Möbel bleiben stehen&ldquo;. Kurz ins Handy
+    diktiert, das reicht.</li>
+  </ol>
+</div>
+
+<div class="flow">
+  <h3><span class="when">Abends am Rechner &mdash; etwa fünf Minuten</span></h3>
+  <ol>
+    <li>Du sagst dem System: <em>&bdquo;Aufnahme Müller verarbeiten.&ldquo;</em></li>
+    <li>Es liest deine Fotos und dein Diktat, legt Kunde und Projekt an und füllt
+    die Aufnahme aus.</li>
+    <li>Dann fragt es gezielt nach dem, was für den Preis wirklich fehlt &mdash; nicht
+    nach allem, sondern nach den zwei, drei Dingen, bei denen es sonst raten müsste.</li>
+    <li>Wenn du willst, rechnet es direkt das Angebot.</li>
+  </ol>
+</div>
+
+<h2><span class="num">4</span>In welcher Reihenfolge wir bauen</h2>
+
+<p>Nicht alles auf einmal. Jeder Schritt muss für sich funktionieren und dir
+etwas bringen, bevor der nächste kommt.</p>
+
+<table>
+  <thead>
+    <tr><th style="width:22mm">Schritt</th><th>Was dazukommt</th><th style="width:42mm">Woran wir merken, dass es sitzt</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Erster</td>
+      <td>Grundgerüst und Baustellenaufnahme. Das System wird auf deinem Rechner
+      eingerichtet, der Weg vom Handy steht.</td>
+      <td>Du machst drei echte Aufnahmen ohne fremde Hilfe.</td>
+    </tr>
+    <tr>
+      <td>Zweiter</td>
+      <td>Kalkulation und Angebot als fertiges PDF in deinem Layout und mit deinen
+      Formulierungen.</td>
+      <td>Ein Angebot, das du ohne Nacharbeit an einen Kunden schickst.</td>
+    </tr>
+    <tr>
+      <td>Dritter</td>
+      <td>Nachkalkulation. Das System lernt aus dem Unterschied zwischen kalkuliert
+      und tatsächlich.</td>
+      <td>Es zeigt dir eine Leistung, bei der du dich verschätzt hast.</td>
+    </tr>
+    <tr>
+      <td>Vierter</td>
+      <td>Belege und Monatspaket für den Steuerberater.</td>
+      <td>Ein Monat geht komplett aus dem System an den Steuerberater.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Bevor ein einziges echtes Angebot aus dem System rausgeht, rechnen wir drei
+deiner <em>alten</em> Projekte damit nach und vergleichen mit dem, was du damals
+wirklich angeboten hast. Erst wenn die Zahlen zusammenpassen, ist die Kalkulation
+scharf.</p>
+
+<h2><span class="num">5</span>Was du dazu beitragen musst</h2>
+
+<p>Das System kann nicht erfinden, wie du kalkulierst. Deine Zahlen und deine Art
+zu arbeiten müssen von dir kommen &mdash; danach läuft es allein. Das ist der einmalige
+Aufwand, und er ist gut investiert:</p>
+
+<ul class="check">
+  <li><strong>Drei bis fünf alte Angebote</strong> &mdash; gewonnene <em>und</em> verlorene.
+  Daraus lesen wir deine Leistungen, deine Formulierungen und dein Preisniveau ab.
+  Die verlorenen sind übrigens die interessantesten.</li>
+
+  <li><strong>Zwei bis drei Schlussrechnungen</strong> zu Projekten, bei denen du noch
+  weißt, wie lange es wirklich gedauert hat. Damit stellen wir die Zeitwerte richtig ein.</li>
+
+  <li><strong>Fotos von zwei, drei deiner Aufmaßzettel</strong> &mdash; genau so, wie du sie
+  wirklich schreibst. Nicht schön abgeschrieben. Das System muss deine echte
+  Handschrift lesen lernen, nicht eine Schönschrift-Version.</li>
+
+  <li><strong>Deine Kalkulationsgrundlagen:</strong> Stundensätze für Meister, Geselle
+  und Azubi, Materialaufschlag, Fahrtkosten, Zuschläge für Arbeiten über Kopf,
+  Gerüst oder Wochenende.</li>
+
+  <li><strong>Wie du es heute mit dem Steuerberater hältst:</strong> welches Programm
+  er nutzt und in welcher Form du ihm die Belege gibst.</li>
+
+  <li><strong>Ein Gespräch, etwa eine halbe Stunde.</strong> Nicht darüber, welche
+  Funktionen du willst &mdash; sondern darüber, wo die Zeit hingeht und was liegen
+  bleibt. Welche Anfrage hast du letzte Woche nicht beantwortet, und warum?</li>
+</ul>
+
+<h2><span class="num">6</span>Was das System nicht ist</h2>
+
+<p>Damit es hinterher keine Überraschungen gibt, drei Dinge klar gesagt:</p>
+
+<div class="note">
+  <p><strong>Es ersetzt deinen Steuerberater nicht.</strong> Es bereitet auf, sortiert
+  und übergibt &mdash; es bucht nicht und es macht keinen Abschluss. Und es ist auch nicht
+  das gesetzliche Archiv für deine Belege: die revisionssichere Aufbewahrung, die das
+  Finanzamt verlangt, bleibt dort, wo sie heute ist. Das System ist deine
+  Arbeitsablage, nicht dein Steuerarchiv.</p>
+</div>
+
+<div class="note">
+  <p><strong>Es schreibt keine Rechnungen an deine Kunden.</strong> Zumindest nicht am
+  Anfang. Rechnungsstellung hängt an Vorschriften, die man nicht nebenbei mitnimmt.
+  Wenn es soweit läuft, dass wir das angehen wollen, machen wir das als eigenen
+  Schritt und richtig.</p>
+</div>
+
+<div class="note">
+  <p><strong>Es rechnet nicht automatisch besser als du.</strong> Am Anfang rechnet es
+  genau so, wie du es ihm beibringst &mdash; und deshalb ist die Gegenprobe mit deinen
+  alten Projekten Pflicht, nicht Beiwerk. Ein Angebot, das dreißig Prozent zu niedrig
+  ist, sieht genauso professionell aus wie ein richtiges. Besser wird das System erst
+  mit der Nachkalkulation, also mit deinen echten Zahlen aus echten Aufträgen.</p>
+</div>
+
+<h3>Und zu deinen Daten</h3>
+
+<p>Alles liegt auf deinem Rechner, in normalen Dateien, die du auch ohne mich und
+ohne irgendein Programm lesen kannst. Kein Zwang zu einem Anbieter, kein Abo, aus
+dem du nicht wieder rauskommst. Wenn du morgen aufhören willst, hast du deine Daten
+&mdash; vollständig und lesbar.</p>
+
+<p>Was du wissen musst: für die Auswertung von Fotos, Diktaten und Texten wird ein
+KI-Dienst genutzt, der außerhalb deines Rechners läuft. Wir gehen vorher gemeinsam
+durch, welche Daten das betrifft, und richten es so ein, dass Kundennamen dabei
+möglichst nicht mitgehen &mdash; das lässt sich technisch sauber trennen. Bei einem
+Betrieb wie deinem ist das machbar, und wir klären es, bevor wir anfangen, nicht danach.</p>
+
+<h2><span class="num">7</span>Der nächste Schritt</h2>
+
+<p>Die Unterlagen aus Abschnitt 5 zusammenstellen &mdash; die alten Angebote, die
+Schlussrechnungen, die Fotos von deinen Aufmaßzetteln, deine Stundensätze. Das ist
+kein großer Akt, das meiste liegt schon irgendwo.</p>
+
+<p>Danach nehmen wir uns die halbe Stunde, ich schaue mir deine Unterlagen an, und
+dann baue ich den ersten Schritt. Wenn die drei Aufnahmen funktionieren, machen wir
+weiter. Wenn nicht, haben wir wenig verloren und viel gelernt.</p>
+
+<div class="footer">
+  Entwurf zur Besprechung. Enthält noch keine Preise und keine Termine &mdash;
+  beides besprechen wir, wenn der Umfang steht.
+</div>
+
+</body>
+</html>
