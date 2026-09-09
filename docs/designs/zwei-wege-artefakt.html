@@ -1,0 +1,754 @@
+<title>Derselbe Auftrag, zwei Wege</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Caveat:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root {
+    --ground:      #eceae4;
+    --panel:       #fbfaf7;
+    --paperbg:     #fdfcf8;
+    --ink:         #201e1b;
+    --ink-mid:     #57534c;
+    --ink-faint:   #8a8479;
+    --rule:        #d5d1c8;
+    --alt-panel:   #e4e1d9;
+    --alt-ink:     #6f6a60;
+    --accent:      #0d6156;
+    --accent-ink:  #0a4a41;
+    --accent-soft: #dfeae7;
+    --signal:      #a8641f;
+
+    --display: Archivo, "Helvetica Neue", Arial, sans-serif;
+    --body: Lora, Georgia, "Times New Roman", serif;
+    --hand: Caveat, "Segoe Script", cursive;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #17181a;
+      --panel:       #1e2022;
+      --paperbg:     #262420;
+      --ink:         #e8e6e1;
+      --ink-mid:     #a8a49c;
+      --ink-faint:   #7c776e;
+      --rule:        #34373a;
+      --alt-panel:   #232527;
+      --alt-ink:     #918b81;
+      --accent:      #5cbdab;
+      --accent-ink:  #8ed5c5;
+      --accent-soft: #12312c;
+      --signal:      #d99a55;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:      #17181a;
+    --panel:       #1e2022;
+    --paperbg:     #262420;
+    --ink:         #e8e6e1;
+    --ink-mid:     #a8a49c;
+    --ink-faint:   #7c776e;
+    --rule:        #34373a;
+    --alt-panel:   #232527;
+    --alt-ink:     #918b81;
+    --accent:      #5cbdab;
+    --accent-ink:  #8ed5c5;
+    --accent-soft: #12312c;
+    --signal:      #d99a55;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16.5px;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 22px 90px;
+  }
+
+  .wrap { max-width: 940px; margin: 0 auto; }
+  .narrow { max-width: 64ch; }
+
+  /* ---------- Hero ---------- */
+  header.hero { padding: 52px 0 8px; }
+  .eyebrow {
+    font-family: var(--display); font-size: 12.5px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    margin: 0 0 16px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(38px, 7.2vw, 68px);
+    font-weight: 800; line-height: 0.96; letter-spacing: -0.025em;
+    text-wrap: balance; margin: 0 0 20px;
+  }
+  .lede { font-size: 20px; line-height: 1.5; color: var(--ink-mid); margin: 0 0 22px; max-width: 32em; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .mockflag {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--display); font-size: 12.5px; font-weight: 700;
+    letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--signal); border: 1.5px solid var(--signal);
+    padding: 6px 13px; margin: 0 0 6px;
+  }
+  .mockflag::before {
+    content: ""; width: 9px; height: 9px; background: var(--signal); flex: 0 0 auto;
+  }
+
+  /* ---------- Abschnitte ---------- */
+  section { margin: 58px 0 0; }
+  h2 {
+    font-family: var(--display); font-size: clamp(26px, 4vw, 36px);
+    font-weight: 700; line-height: 1.06; letter-spacing: -0.02em;
+    margin: 0 0 12px; text-wrap: balance;
+  }
+  .sublede { color: var(--ink-mid); margin: 0 0 26px; max-width: 34em; }
+  h3 {
+    font-family: var(--display); font-size: 20px; font-weight: 700;
+    margin: 0 0 8px; letter-spacing: -0.01em;
+  }
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ---------- Figur ---------- */
+  figure { margin: 0; }
+  .figscroll {
+    overflow-x: auto; background: var(--panel);
+    border: 1px solid var(--rule); padding: 18px 20px;
+  }
+  .figscroll svg { display: block; min-width: 720px; max-width: 100%; height: auto; color: var(--ink); }
+  figcaption {
+    font-size: 14.5px; color: var(--ink-mid); margin-top: 12px;
+    max-width: 46em; font-style: italic;
+  }
+
+  /* ---------- Zahlenvergleich ---------- */
+  .cmp { border-top: 2px solid var(--ink); margin-top: 8px; }
+  .cmprow {
+    display: grid; grid-template-columns: 1.15fr 1fr 1fr;
+    gap: 18px; align-items: baseline;
+    padding: 15px 0; border-bottom: 1px solid var(--rule);
+  }
+  .cmphead { padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  .cmphead span {
+    font-family: var(--display); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .cmphead span.b { color: var(--alt-ink); }
+  .cmphead span.c { color: var(--accent); }
+  .cmprow .what { font-weight: 600; }
+  .cmprow .ohne {
+    font-family: var(--display); font-weight: 600; color: var(--alt-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .cmprow .mit {
+    font-family: var(--display); font-weight: 700; color: var(--accent);
+    font-variant-numeric: tabular-nums; font-size: 17.5px;
+  }
+  @media (max-width: 620px) {
+    .cmprow { grid-template-columns: 1fr; gap: 3px; }
+    .cmprow .ohne::before { content: "ohne: "; color: var(--ink-faint); font-weight: 500; }
+    .cmprow .mit::before { content: "mit: "; color: var(--ink-faint); font-weight: 500; }
+    .cmphead { display: none; }
+  }
+
+  /* ---------- Demo ---------- */
+  .demobar {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 14px 16px; margin: 0 0 26px;
+  }
+  .demobar .hint { font-size: 14.5px; color: var(--ink-mid); flex: 1 1 220px; }
+
+  button {
+    font-family: var(--display); font-size: 15px; font-weight: 700;
+    letter-spacing: 0.02em;
+    background: var(--accent); color: var(--panel);
+    border: 1.5px solid var(--accent); border-radius: 2px;
+    padding: 9px 17px; cursor: pointer;
+  }
+  button.ghost { background: transparent; color: var(--accent); }
+  button:hover { opacity: 0.87; }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button[disabled] { opacity: 0.4; cursor: default; }
+
+  .stage { margin: 0 0 26px; }
+  .stage[hidden] { display: none !important; }
+  .stagelab {
+    font-family: var(--display); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint);
+    display: flex; align-items: center; gap: 10px; margin: 0 0 10px;
+  }
+  .stagelab::after { content: ""; flex: 1 1 auto; height: 1px; background: var(--rule); }
+  .stagelab b { color: var(--accent); font-weight: 700; }
+
+  /* Der Zettel */
+  .zettel {
+    background: var(--paperbg);
+    background-image: repeating-linear-gradient(var(--paperbg) 0 27px, var(--rule) 27px 28px);
+    border: 1px solid var(--rule);
+    box-shadow: 3px 4px 0 rgba(0,0,0,0.07);
+    padding: 16px 22px 22px;
+    transform: rotate(-0.5deg);
+    font-family: var(--hand);
+    font-size: 25px; line-height: 28px; color: var(--ink);
+    max-width: 430px;
+  }
+  .zettel .z1 { font-weight: 600; }
+  .zettel .zi { padding-left: 24px; }
+  .zettel .zq { color: var(--signal); }
+
+  /* Karten */
+  .card {
+    background: var(--panel); border: 1px solid var(--rule);
+    padding: 20px 22px;
+  }
+  .card.acc { border-left: 3px solid var(--accent); }
+  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 5px 18px; margin: 0 0 16px; }
+  .kv dt {
+    font-family: var(--display); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint);
+    padding-top: 3px;
+  }
+  .kv dd { margin: 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .tscroll { overflow-x: auto; }
+  th {
+    font-family: var(--display); font-size: 11.5px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; text-align: left;
+    color: var(--ink-faint); border-bottom: 1.5px solid var(--ink);
+    padding: 0 12px 7px 0; white-space: nowrap;
+  }
+  th.r, td.r { text-align: right; }
+  td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  td.n {
+    font-family: var(--display); font-variant-numeric: tabular-nums;
+    white-space: nowrap; font-weight: 500;
+  }
+  td.pos {
+    font-family: var(--display); font-weight: 700; color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  tfoot td { border-bottom: none; padding-top: 10px; }
+  tfoot tr.sum td { border-top: 1.5px solid var(--ink); font-weight: 700; }
+  tfoot tr.total td {
+    font-family: var(--display); font-size: 21px; font-weight: 800;
+    color: var(--signal); border-top: 2px solid var(--signal); padding-top: 12px;
+  }
+
+  .asks { margin: 0; padding: 0; list-style: none; }
+  .asks li {
+    padding: 8px 0 8px 26px; position: relative; border-top: 1px solid var(--rule);
+  }
+  .asks li::before {
+    content: "?"; position: absolute; left: 0; top: 8px;
+    font-family: var(--display); font-weight: 800; color: var(--signal);
+  }
+
+  .knobs {
+    display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end;
+    padding: 14px 0 18px; border-bottom: 1px solid var(--rule); margin-bottom: 18px;
+  }
+  .knob { display: grid; gap: 5px; }
+  .knob label {
+    font-family: var(--display); font-size: 11.5px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .knob input {
+    font-family: var(--display); font-size: 17px; font-weight: 600;
+    font-variant-numeric: tabular-nums; text-align: right;
+    width: 112px; padding: 7px 10px; color: var(--ink);
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 2px;
+  }
+  .knobnote { font-size: 14px; color: var(--ink-faint); flex: 1 1 200px; }
+
+  .badge {
+    display: inline-block; font-family: var(--display); font-size: 12px;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); border: 1.5px solid var(--accent);
+    padding: 4px 10px; margin: 0 0 14px;
+  }
+
+  /* ---------- Bausteine ---------- */
+  .mods { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .mod { background: var(--panel); padding: 17px 18px; display: grid; gap: 6px; align-content: start; }
+  .mod .mh { display: flex; align-items: baseline; gap: 9px; }
+  .mod .mn {
+    font-family: var(--display); font-size: 12px; font-weight: 800;
+    color: var(--accent); font-variant-numeric: tabular-nums;
+  }
+  .mod .mt { font-family: var(--display); font-size: 17px; font-weight: 700; line-height: 1.15; }
+  .mod .md { font-size: 14.5px; color: var(--ink-mid); line-height: 1.45; }
+  .mod .ms {
+    font-family: var(--display); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.11em; text-transform: uppercase; margin-top: 2px;
+  }
+  .mod .ms.now { color: var(--accent); }
+  .mod .ms.next { color: var(--ink-mid); }
+  .mod .ms.idea { color: var(--ink-faint); }
+
+  /* ---------- Fuß ---------- */
+  footer.end {
+    margin: 60px 0 0; padding: 26px 0 0; border-top: 2px solid var(--ink);
+  }
+  footer.end p { max-width: 46em; color: var(--ink-mid); font-size: 15.5px; }
+  footer.end b { color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  @media (max-width: 560px) {
+    body { padding: 0 16px 70px; }
+    .zettel { font-size: 21px; line-height: 26px; background-image: repeating-linear-gradient(var(--paperbg) 0 25px, var(--rule) 25px 26px); }
+  }
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Malerbetrieb · Vorher / Nachher</p>
+  <h1>Derselbe Auftrag,<br>zwei Wege</h1>
+  <p class="lede">Eine Anfrage kommt rein. Links, was heute damit passiert.
+  Rechts, was mit dem System damit passiert. <b>Der Unterschied ist nicht die
+  Technik — es sind vierzehn Tage und drei Abende.</b></p>
+  <p class="mockflag">Attrappe · erfundene Zahlen</p>
+</header>
+
+<section>
+  <figure>
+    <div class="figscroll">
+      <svg viewBox="0 0 880 690" role="img" aria-label="Eine Anfrage gabelt sich in zwei Wege: ohne System sieben Schritte über vierzehn Tage mit drei Abenden Büroarbeit und ohne Nachfassen; mit System vier Schritte am selben Tag, mit automatischem Nachfassen und Rückfluss in die Kalkulation.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+          </marker>
+          <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#0d6156"></path>
+          </marker>
+        </defs>
+
+        <!-- Start -->
+        <rect x="330" y="12" width="220" height="42" fill="none" stroke="currentColor" stroke-width="2"></rect>
+        <text x="440" y="38" text-anchor="middle" font-family="Archivo, sans-serif" font-size="14" font-weight="700" fill="currentColor">Anfrage kommt rein</text>
+
+        <!-- Gabelung -->
+        <path d="M 400 54 L 400 74 L 190 74 L 190 96" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#ar)"></path>
+        <path d="M 480 54 L 480 74 L 690 74 L 690 96" fill="none" stroke="#0d6156" stroke-width="2" marker-end="url(#ara)"></path>
+
+        <!-- Spaltenköpfe -->
+        <text x="62" y="93" text-anchor="start" font-family="Archivo, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.6" fill="currentColor" opacity="0.55">OHNE SYSTEM</text>
+        <text x="562" y="93" text-anchor="start" font-family="Archivo, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.6" fill="#0d6156">MIT SYSTEM</text>
+
+        <!-- OHNE: Knoten -->
+        <g font-family="Archivo, sans-serif" font-size="13" fill="currentColor">
+          <rect x="60" y="100" width="260" height="38" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.75"></rect>
+          <text x="190" y="124" text-anchor="middle">Ortstermin, Aufmaß auf den Zettel</text>
+
+          <rect x="60" y="168" width="260" height="38" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.75"></rect>
+          <text x="190" y="192" text-anchor="middle">Zettel liegt im Auto</text>
+
+          <rect x="60" y="236" width="260" height="38" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.75"></rect>
+          <text x="190" y="260" text-anchor="middle">Abends abtippen</text>
+
+          <rect x="60" y="304" width="260" height="38" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.75"></rect>
+          <text x="190" y="328" text-anchor="middle">In Excel rechnen</text>
+
+          <rect x="60" y="372" width="260" height="38" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.75"></rect>
+          <text x="190" y="396" text-anchor="middle">In Word formatieren</text>
+
+          <rect x="60" y="440" width="260" height="38" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.75"></rect>
+          <text x="190" y="464" text-anchor="middle">Angebot geht raus</text>
+
+          <rect x="60" y="508" width="260" height="38" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.75"></rect>
+          <text x="190" y="532" text-anchor="middle">Keine Rückmeldung</text>
+
+          <rect x="60" y="596" width="260" height="52" fill="none" stroke="currentColor" stroke-width="2"></rect>
+          <text x="190" y="618" text-anchor="middle" font-weight="700">Auftrag weg</text>
+          <text x="190" y="637" text-anchor="middle" font-size="12" opacity="0.7">niemand fasst nach</text>
+        </g>
+
+        <!-- OHNE: Pfeile + Zeitangaben -->
+        <g stroke="currentColor" stroke-width="1.3" fill="none" opacity="0.75">
+          <line x1="190" y1="138" x2="190" y2="166" marker-end="url(#ar)"></line>
+          <line x1="190" y1="206" x2="190" y2="234" marker-end="url(#ar)"></line>
+          <line x1="190" y1="274" x2="190" y2="302" marker-end="url(#ar)"></line>
+          <line x1="190" y1="342" x2="190" y2="370" marker-end="url(#ar)"></line>
+          <line x1="190" y1="410" x2="190" y2="438" marker-end="url(#ar)"></line>
+          <line x1="190" y1="478" x2="190" y2="506" marker-end="url(#ar)"></line>
+          <line x1="190" y1="546" x2="190" y2="594" marker-end="url(#ar)"></line>
+        </g>
+        <g font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity="0.62" text-anchor="start">
+          <text x="200" y="158">45 min</text>
+          <text x="200" y="226">4 Tage</text>
+          <text x="200" y="294">40 min, abends</text>
+          <text x="200" y="362">60 min, abends</text>
+          <text x="200" y="430">45 min, sonntags</text>
+          <text x="200" y="498">Tag 14</text>
+          <text x="200" y="574">Stille</text>
+        </g>
+
+        <!-- MIT: Knoten -->
+        <g font-family="Archivo, sans-serif" font-size="13" fill="currentColor">
+          <rect x="560" y="100" width="260" height="38" fill="none" stroke="#0d6156" stroke-width="1.6"></rect>
+          <text x="690" y="124" text-anchor="middle">Ortstermin: Zettel fotografiert</text>
+
+          <rect x="560" y="168" width="260" height="38" fill="none" stroke="#0d6156" stroke-width="1.6"></rect>
+          <text x="690" y="192" text-anchor="middle">Aufnahme verarbeitet sich</text>
+
+          <rect x="560" y="236" width="260" height="38" fill="none" stroke="#0d6156" stroke-width="1.6"></rect>
+          <text x="690" y="260" text-anchor="middle">Angebot prüfen, absenden</text>
+
+          <rect x="560" y="304" width="260" height="38" fill="none" stroke="#0d6156" stroke-width="1.6"></rect>
+          <text x="690" y="328" text-anchor="middle">Nachfassen, automatisch</text>
+
+          <rect x="560" y="372" width="260" height="38" fill="none" stroke="#0d6156" stroke-width="1.6"></rect>
+          <text x="690" y="396" text-anchor="middle">Auftrag angenommen</text>
+
+          <rect x="560" y="440" width="260" height="38" fill="none" stroke="#0d6156" stroke-width="1.6"></rect>
+          <text x="690" y="464" text-anchor="middle">Ist-Stunden erfasst</text>
+
+          <rect x="560" y="596" width="260" height="52" fill="none" stroke="#0d6156" stroke-width="2.4"></rect>
+          <text x="690" y="618" text-anchor="middle" font-weight="700" fill="#0d6156">Auftrag gewonnen</text>
+          <text x="690" y="637" text-anchor="middle" font-size="12" fill="#0d6156">und die Kalkulation lernt daraus</text>
+        </g>
+
+        <!-- MIT: Pfeile + Zeitangaben -->
+        <g stroke="#0d6156" stroke-width="1.6" fill="none">
+          <line x1="690" y1="138" x2="690" y2="166" marker-end="url(#ara)"></line>
+          <line x1="690" y1="206" x2="690" y2="234" marker-end="url(#ara)"></line>
+          <line x1="690" y1="274" x2="690" y2="302" marker-end="url(#ara)"></line>
+          <line x1="690" y1="342" x2="690" y2="370" marker-end="url(#ara)"></line>
+          <line x1="690" y1="410" x2="690" y2="438" marker-end="url(#ara)"></line>
+          <line x1="690" y1="478" x2="690" y2="594" marker-end="url(#ara)"></line>
+        </g>
+        <g font-family="Archivo, sans-serif" font-size="11.5" fill="#0d6156" text-anchor="start">
+          <text x="700" y="158">45 min</text>
+          <text x="700" y="226">5 min</text>
+          <text x="700" y="294">15 min, selber Tag</text>
+          <text x="700" y="362">Tag 5</text>
+          <text x="700" y="430">Tag 8</text>
+          <text x="700" y="516">nach Abschluss</text>
+        </g>
+
+        <!-- Rückfluss: der Pfeil, den die linke Seite nicht hat -->
+        <path d="M 560 464 L 500 464 L 500 190 L 558 190" fill="none" stroke="#0d6156" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ara)"></path>
+        <text x="486" y="330" text-anchor="end" font-family="Archivo, sans-serif" font-size="11.5" font-weight="600" fill="#0d6156">Erfahrungswerte</text>
+        <text x="486" y="345" text-anchor="end" font-family="Archivo, sans-serif" font-size="11.5" font-weight="600" fill="#0d6156">zurück in die</text>
+        <text x="486" y="360" text-anchor="end" font-family="Archivo, sans-serif" font-size="11.5" font-weight="600" fill="#0d6156">Kalkulation</text>
+      </svg>
+    </div>
+    <figcaption>Der Ortstermin dauert in beiden Fällen 45 Minuten — daran ändert kein
+    System etwas. Der Unterschied liegt danach: drei Abende Büroarbeit und vierzehn Tage
+    Durchlaufzeit gegen zwanzig Minuten am selben Tag. Und die gestrichelte Linie hat
+    die linke Seite gar nicht: was ein Auftrag wirklich gekostet hat, fließt nie in die
+    nächste Kalkulation zurück.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>Was sich in Zahlen ändert</h2>
+  <p class="sublede">Beispielwerte für einen Zweiraum-Auftrag, wie er zehnmal im Jahr
+  vorkommt. Beim echten Termin ersetzen wir sie durch die tatsächlichen.</p>
+
+  <div class="cmp">
+    <div class="cmprow cmphead">
+      <span>Woran es sich zeigt</span><span class="b">Ohne System</span><span class="c">Mit System</span>
+    </div>
+    <div class="cmprow">
+      <span class="what">Büroarbeit je Angebot</span>
+      <span class="ohne">3 Std. 10 Min.</span>
+      <span class="mit">20 Minuten</span>
+    </div>
+    <div class="cmprow">
+      <span class="what">Angebot liegt beim Kunden</span>
+      <span class="ohne">nach 14 Tagen</span>
+      <span class="mit">am selben Tag</span>
+    </div>
+    <div class="cmprow">
+      <span class="what">Unbeantwortete Angebote, bei denen nachgefasst wird</span>
+      <span class="ohne">0 von 10</span>
+      <span class="mit">10 von 10</span>
+    </div>
+    <div class="cmprow">
+      <span class="what">Wo die Belege liegen</span>
+      <span class="ohne">Schuhkarton, im März</span>
+      <span class="mit">Monatspaket, fertig</span>
+    </div>
+    <div class="cmprow">
+      <span class="what">Worauf die Kalkulation beruht</span>
+      <span class="ohne">Bauchgefühl</span>
+      <span class="mit">24 abgerechnete Projekte</span>
+    </div>
+    <div class="cmprow">
+      <span class="what">Was der Meister abends macht</span>
+      <span class="ohne">Angebote schreiben</span>
+      <span class="mit">Feierabend</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Zum Anfassen</h2>
+  <p class="sublede">So läuft eine Aufnahme durch. Der Zettel ist erfunden, die Preise
+  sind Beispielwerte — aber der Weg ist genau der, der später auf dem Rechner läuft.</p>
+
+  <div class="demobar">
+    <button id="playBtn" class="ghost">Schritt für Schritt vorführen</button>
+    <button id="nextBtn" hidden>Aufnahme verarbeiten</button>
+    <span class="hint">Zum Vorführen beim Termin: setzt zurück auf den Zettel und
+    zeigt jeden Schritt einzeln.</span>
+  </div>
+
+  <div class="stage" id="s1">
+    <p class="stagelab"><b>Schritt 1</b> Was von der Baustelle mitkommt</p>
+    <div class="zettel">
+      <div class="z1">Fam. Müller &middot; Ringstr. 12</div>
+      <div>Wohnzi. 4,20 &times; 5,10 &nbsp; h 2,50</div>
+      <div class="zi">alte Tapete raus!</div>
+      <div class="zi">Decke Q2, 2&times; wei&szlig;</div>
+      <div>Flur 1,40 &times; 6,00</div>
+      <div class="zi">Riss &uuml;ber der T&uuml;r</div>
+      <div class="zq">Treppenhaus?? evtl. sp&auml;ter</div>
+      <div>Termin ab KW 12</div>
+    </div>
+  </div>
+
+  <div class="stage" id="s2">
+    <p class="stagelab"><b>Schritt 2</b> Was das System daraus macht</p>
+    <div class="card acc">
+      <dl class="kv">
+        <dt>Kunde</dt><dd>Familie Müller, Ringstraße 12</dd>
+        <dt>Projekt</dt><dd>P-2026-018 · Wohnzimmer und Flur</dd>
+        <dt>Termin</dt><dd>ab Kalenderwoche 12</dd>
+      </dl>
+      <div class="tscroll">
+        <table>
+          <thead>
+            <tr><th>Raum</th><th>Maße</th><th class="r">Wand</th><th class="r">Decke</th><th>Leistung</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Wohnzimmer</td><td>4,20 × 5,10 × 2,50 m</td>
+              <td class="n r">41,5 m²</td><td class="n r">21,4 m²</td>
+              <td>Tapete entfernen, Q2, Decke 2×</td>
+            </tr>
+            <tr>
+              <td>Flur</td><td>1,40 × 6,00 × 2,50 m</td>
+              <td class="n r">31,0 m²</td><td class="n r">8,4 m²</td>
+              <td>Riss über Tür sanieren, streichen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:16px"><strong>Das muss ich noch fragen</strong> — die zwei
+      Dinge, ohne die der Preis geraten wäre:</p>
+      <ul class="asks">
+        <li>Treppenhaus mit im Auftrag oder separat? Auf dem Zettel steht ein Fragezeichen.</li>
+        <li>Bleiben die Möbel stehen? Das ändert den Aufwand fürs Abdecken.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage" id="s3">
+    <p class="stagelab"><b>Schritt 3</b> Das Angebot</p>
+    <p class="badge">Fertig am Tag des Ortstermins</p>
+
+    <div class="knobs">
+      <div class="knob">
+        <label for="kWand">Wandfläche</label>
+        <input type="number" id="kWand" min="0" max="2000" step="0.5" value="72.5">
+      </div>
+      <div class="knob">
+        <label for="kDecke">Deckenfläche</label>
+        <input type="number" id="kDecke" min="0" max="2000" step="0.5" value="29.8">
+      </div>
+      <span class="knobnote">Dreh an den Flächen — das Angebot rechnet mit. Genau das
+      passiert, wenn beim Ortstermin ein Raum dazukommt.</span>
+    </div>
+
+    <div class="card">
+      <div class="tscroll">
+        <table>
+          <thead>
+            <tr><th style="width:34px">Pos</th><th>Leistung</th><th class="r">Menge</th><th class="r">Einheit</th><th class="r">EP</th><th class="r">GP</th></tr>
+          </thead>
+          <tbody id="lvBody"></tbody>
+          <tfoot>
+            <tr class="sum"><td colspan="5" class="r">Summe netto</td><td class="n r" id="sNetto">—</td></tr>
+            <tr><td colspan="5" class="r">Umsatzsteuer 19 %</td><td class="n r" id="sUst">—</td></tr>
+            <tr class="total"><td colspan="5" class="r">Angebotssumme</td><td class="r" id="sBrutto">—</td></tr>
+          </tfoot>
+        </table>
+      </div>
+      <p style="margin-top:16px;font-size:14.5px;color:var(--ink-mid)">
+        Gerechnet mit den Aufwands- und Materialwerten des Betriebs — nicht mit
+        Branchendurchschnitten. Deshalb müssen beim ersten Termin die alten Angebote
+        und Schlussrechnungen auf den Tisch: sie sind die Kalibrierung.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Und was noch möglich wäre</h2>
+  <p class="sublede">Das System ist in Bausteinen gedacht. Jeder muss allein einen
+  Nutzen haben, jeder ist abschaltbar, und keiner ist Pflicht.</p>
+
+  <div class="mods">
+    <div class="mod">
+      <div class="mh"><span class="mn">01</span><span class="mt">Anfragen-Mappe</span></div>
+      <p class="md">Morgens eine Liste: welche Anfragen passen, was sie ungefähr wert
+      sind, was dafür und dagegen spricht, und ein fertiger Antworttext. Entscheiden
+      tut der Chef.</p>
+      <p class="ms idea">Idee</p>
+    </div>
+    <div class="mod">
+      <div class="mh"><span class="mn">02</span><span class="mt">Baustellenaufnahme</span></div>
+      <p class="md">Zettel fotografieren, Räume fotografieren, Besonderheiten
+      diktieren. Abends steht das Projekt im System.</p>
+      <p class="ms now">Wird zuerst gebaut</p>
+    </div>
+    <div class="mod">
+      <div class="mh"><span class="mn">03</span><span class="mt">Angebot</span></div>
+      <p class="md">Aus der Aufnahme das Leistungsverzeichnis mit den eigenen Preisen,
+      als PDF im eigenen Layout.</p>
+      <p class="ms next">Danach</p>
+    </div>
+    <div class="mod">
+      <div class="mh"><span class="mn">04</span><span class="mt">Nachfassen</span></div>
+      <p class="md">Angebote ohne Antwort nach 5 und 14 Tagen erinnern, mit fertigem
+      Text. Der billigste Umsatz, den es gibt.</p>
+      <p class="ms idea">Idee</p>
+    </div>
+    <div class="mod">
+      <div class="mh"><span class="mn">05</span><span class="mt">Nachkalkulation</span></div>
+      <p class="md">Was war kalkuliert, was hat es gekostet. Nach zwanzig Projekten
+      rechnet das System genauer als das Bauchgefühl.</p>
+      <p class="ms next">Danach</p>
+    </div>
+    <div class="mod">
+      <div class="mh"><span class="mn">06</span><span class="mt">Belege</span></div>
+      <p class="md">Rechnung fotografieren, fertig. Am Monatsende liegt das Paket für
+      den Steuerberater bereit.</p>
+      <p class="ms next">Danach</p>
+    </div>
+    <div class="mod">
+      <div class="mh"><span class="mn">07</span><span class="mt">Betriebsspiegel</span></div>
+      <p class="md">Welche Leistung trägt, welcher Kundentyp zahlt pünktlich, wie hoch
+      die Zuschlagsquote wirklich ist.</p>
+      <p class="ms idea">Idee</p>
+    </div>
+    <div class="mod">
+      <div class="mh"><span class="mn">09</span><span class="mt">Inhalte</span></div>
+      <p class="md">Aus dem Bildmaterial der Baustellen werden Beiträge. Wer eine
+      Spachtelwand im Video gesehen hat und genau die will, vergleicht keine drei
+      Angebote.</p>
+      <p class="ms idea">Idee</p>
+    </div>
+  </div>
+</section>
+
+<footer class="end">
+  <p><b>Damit hier keine Erwartung entsteht, die ich nicht halte:</b> diese Seite ist
+  eine Attrappe. Der Zettel ist erfunden, die Kundschaft gibt es nicht, die Preise sind
+  Beispielwerte in einer plausiblen Größenordnung, und die Zeiten sind Schätzungen. Was
+  hier klickt, ist nachgebaut, nicht das laufende System.</p>
+  <p>Was daran echt ist: der Weg. Genau in dieser Reihenfolge soll es funktionieren, und
+  zuerst gebaut wird Baustein 02, die Baustellenaufnahme. Alles andere kommt nur, wenn
+  das erste Stück im Alltag trägt.</p>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var POS = [
+    { p: "01", t: "Alte Tapete abnehmen, Untergrund reinigen", u: "m²", q: "wand", ep: 6.50 },
+    { p: "02", t: "Untergrund spachteln, Qualitätsstufe Q2", u: "m²", q: "wand", ep: 9.80 },
+    { p: "03", t: "Grundierung auf saugfähigem Untergrund", u: "m²", q: "wand", ep: 2.90 },
+    { p: "04", t: "Dispersion weiß, zweifacher Anstrich, Wände", u: "m²", q: "wand", ep: 8.40 },
+    { p: "05", t: "Decken zweifach streichen", u: "m²", q: "decke", ep: 9.20 },
+    { p: "06", t: "Riss über Tür aufarbeiten, armieren", u: "psch", q: "fix", ep: 145.00 },
+    { p: "07", t: "Abdecken, Abkleben, Baustelle reinigen", u: "psch", q: "fix", ep: 285.00 },
+    { p: "08", t: "An- und Abfahrt", u: "psch", q: "fix", ep: 65.00 }
+  ];
+
+  var eur = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
+  var qty = new Intl.NumberFormat("de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+  var wandEl = document.getElementById("kWand");
+  var deckeEl = document.getElementById("kDecke");
+  var body = document.getElementById("lvBody");
+
+  function val(el) {
+    var v = parseFloat(String(el.value).replace(",", "."));
+    return isFinite(v) && v > 0 ? v : 0;
+  }
+
+  function renderLV() {
+    var wand = val(wandEl), decke = val(deckeEl);
+    var rows = "", netto = 0;
+
+    POS.forEach(function (r) {
+      var m = r.q === "wand" ? wand : (r.q === "decke" ? decke : 1);
+      var gp = m * r.ep;
+      netto += gp;
+      rows += '<tr>'
+        + '<td class="pos">' + r.p + '</td>'
+        + '<td>' + r.t + '</td>'
+        + '<td class="n r">' + (r.q === "fix" ? "1" : qty.format(m)) + '</td>'
+        + '<td class="n r">' + r.u + '</td>'
+        + '<td class="n r">' + eur.format(r.ep) + '</td>'
+        + '<td class="n r">' + eur.format(gp) + '</td>'
+        + '</tr>';
+    });
+
+    body.innerHTML = rows;
+    document.getElementById("sNetto").textContent = eur.format(netto);
+    document.getElementById("sUst").textContent = eur.format(netto * 0.19);
+    document.getElementById("sBrutto").textContent = eur.format(netto * 1.19);
+  }
+
+  wandEl.addEventListener("input", renderLV);
+  deckeEl.addEventListener("input", renderLV);
+  renderLV();
+
+  /* ---------- Vorführmodus ---------- */
+
+  var stages = [document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3")];
+  var playBtn = document.getElementById("playBtn");
+  var nextBtn = document.getElementById("nextBtn");
+  var STEPS = ["Aufnahme verarbeiten", "Angebot rechnen"];
+  var shown = 3;
+
+  function paint() {
+    stages.forEach(function (s, i) { s.hidden = i >= shown; });
+    if (shown >= 3) {
+      nextBtn.hidden = true;
+      playBtn.textContent = "Schritt für Schritt vorführen";
+    } else {
+      nextBtn.hidden = false;
+      nextBtn.textContent = STEPS[shown - 1];
+      playBtn.textContent = "Alles zeigen";
+    }
+  }
+
+  playBtn.addEventListener("click", function () {
+    shown = shown >= 3 ? 1 : 3;
+    paint();
+  });
+
+  nextBtn.addEventListener("click", function () {
+    if (shown < 3) shown++;
+    paint();
+    var el = stages[shown - 1];
+    if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  paint();
+})();
+</script>
