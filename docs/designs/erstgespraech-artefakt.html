@@ -301,7 +301,7 @@
 
 <div class="status">
   <div class="wrap" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 22px;width:100%">
-    <span class="cell"><span class="lab">Beantwortet</span><span class="val" id="progress">0 / 12</span></span>
+    <span class="cell"><span class="lab">Beantwortet</span><span class="val" id="progress">0 / 13</span></span>
     <span class="cell"><span class="lab">Preis / Monat</span><span class="val blau" id="statusPrice">—</span></span>
     <span class="cell"><span class="lab">Ampel</span><span class="chip off" id="statusAmpel">offen</span></span>
     <span class="spacer"></span>
@@ -352,6 +352,16 @@
   <div class="q">
     <p class="ask">Machst du das alles selbst, oder hast du jemanden im Büro?</p>
     <textarea data-f="a4" placeholder="Wer macht was …"></textarea>
+  </div>
+
+  <div class="q">
+    <p class="ask">Wie kommen deine Kunden heute zu dir? Empfehlung, Google, Portale,
+    Stammkunden, Hausverwaltungen? Und hast du schon mal über MyHammer gearbeitet —
+    was war das Ergebnis?</p>
+    <p class="why">Entscheidet später, ob Kundengewinnung überhaupt über Portale läuft
+    oder über seine Bewertungen. Frag auch, welcher Kanal die besten Aufträge bringt,
+    nicht die meisten.</p>
+    <textarea data-f="a5" placeholder="Kanäle, und welcher die guten Aufträge bringt …"></textarea>
   </div>
 </section>
 
@@ -545,7 +555,7 @@
 (function () {
   "use strict";
 
-  var FIELDS = ["a1","a2","a3","a4","b1","b2","c_note","e1","g1"];
+  var FIELDS = ["a1","a2","a3","a4","a5","b1","b2","c_note","e1","g1"];
   var NUMS = ["n_all","n_lost","n_db"];
   var CHECKS = ["t1","t2","t3","t4","t5"];
   var LS_KEY = "erstgespraech-malermeister-v1";
@@ -589,7 +599,8 @@
     var answered = 0;
     FIELDS.forEach(function (k) { if (String(state[k]).trim()) answered++; });
     NUMS.forEach(function (k) { if (num(k) !== null) answered++; });
-    document.getElementById("progress").textContent = answered + " / 12";
+    document.getElementById("progress").textContent =
+      answered + " / " + (FIELDS.length + NUMS.length);
 
     var chip = document.getElementById("statusAmpel");
     var map = { gruen: ["gruen", "grün"], gelb: ["gelb", "gelb"], rot: ["rot", "rot"] };
@@ -723,6 +734,7 @@
     a2: "Dauer und Tageszeit",
     a3: "Werkzeug heute (Zettel / Excel / Programm)",
     a4: "Wer macht das Büro",
+    a5: "Wie die Kunden heute kommen (Kanäle, MyHammer-Erfahrung)",
     b1: "Verlorener Auftrag, weil ein anderer schneller war",
     b2: "Steuerberater — letzte Mahnung",
     c_note: "Antwort auf die Sonntagsfrage, wörtlich",
@@ -747,7 +759,7 @@
     L.push("Stand: " + new Date().toLocaleDateString("de-DE"));
     L.push("");
     L.push("## Wie es heute läuft");
-    ["a1","a2","a3","a4"].forEach(function (k) {
+    ["a1","a2","a3","a4","a5"].forEach(function (k) {
       L.push("**" + LABELS[k] + ":** " + (String(state[k]).trim() || "— nicht beantwortet"));
     });
     L.push("");
