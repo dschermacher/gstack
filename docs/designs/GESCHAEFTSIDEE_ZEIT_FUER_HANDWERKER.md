@@ -192,9 +192,14 @@ und werden durch das Kundengespräch beantwortet, nicht durch Nachdenken:
 
 **Danach:**
 
-4. Phase 1 bauen (Vault-Fundament + Baustellenaufnahme) — aber von Anfang an
+4. Weitere Bausteine sind gesammelt, aber nicht eingeplant — Kundengewinnung,
+   Nachfassen bei offenen Angeboten, Betriebsspiegel. Siehe
+   `HANDWERKER_BAUSTEINE.md`; bemerkenswert daran ist, dass Kundengewinnung
+   vermutlich stärker verkauft als Zeitsparen, weil sie den Umweg über
+   „gewonnene Zeit in Umsatz verwandeln" überspringt.
+5. Phase 1 bauen (Vault-Fundament + Baustellenaufnahme) — aber von Anfang an
    getrennt in Maschinerie und Stammdaten.
-5. Die Diagnostik mit den echten Antworten fortsetzen.
+6. Die Diagnostik mit den echten Antworten fortsetzen.
 
 ---
 
