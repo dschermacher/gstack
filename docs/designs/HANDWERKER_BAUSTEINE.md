@@ -53,6 +53,7 @@ Die Reihenfolge ist echt: jeder Baustein füttert den nächsten mit Daten.
 | 6 | **Belege** | Belege lesen, zuordnen, Monatspaket für den Steuerberater. | geplant (Phase 4) |
 | 7 | **Betriebsspiegel** | Auftragsquote, welche Leistung trägt, welcher Kundentyp zahlt pünktlich. | Idee |
 | 8 | **Ausführung** | Termine, Material, Mitarbeiterplanung. | bewusst offen — eigenes Projekt |
+| 9 | **Inhalte** | Aus dem Bildmaterial der Baustellen Beiträge machen: schneiden, betexten, veröffentlichen, auf Nachrichten antworten. | Idee — siehe 4b |
 
 ### Baustein 4 ist der unterschätzte
 
@@ -144,21 +145,107 @@ Leuten, die mit dem Betrieb noch in keiner Beziehung stehen. Also: nur speichern
 was für die Entscheidung nötig ist, und löschen, was nicht weiterverfolgt wird.
 Kein Sammelarchiv aus Verlegenheit.
 
-### Korrektur zum Kanal
+### Der Rahmen: eigenes Publikum gegen gemietetes
 
-LinkedIn ist für einen Malermeister der falsche Ort, jedenfalls im
-Privatkundengeschäft — dort sitzen keine Hausbesitzer. Realistisch nach Wert:
+Alle Kundengewinnungs-Bausteine ordnen sich entlang einer einzigen Frage: gehört
+die Aufmerksamkeit ihm, oder mietet er sie?
+
+**Gemietet** sind die Portale. Sie funktionieren sofort, kosten aber Marge und
+liefern preissensible Kundschaft — wer über ein Portal kommt, vergleicht drei
+Angebote. Die Beziehung gehört dem Portal, nicht ihm.
+
+**Eigen** sind Bewertungen, Empfehlungen und Inhalte. Sie brauchen Monate, bis
+sie tragen, wachsen dann aber weiter, ohne dass jemand nachlegt — und die
+Kundschaft kommt vorbestimmt: sie will *ihn*, nicht ein Angebot.
+
+Portale sind die Übergangslösung, das eigene Publikum ist der Bestand. Nach Wert
+sortiert:
 
 1. **Google-Unternehmensprofil und Bewertungen.** Für Handwerk der Kanal Nummer
    eins. Wer bei „Maler + Ort" oben mit vierzig guten Bewertungen steht, braucht
    keine Portale. Ein Baustein, der nach jedem abgeschlossenen Auftrag um eine
    Bewertung bittet, ist billig zu bauen und wirkt jahrelang.
-2. **Empfehlung.** Läuft ohne Technik, lässt sich aber unterstützen: wer hat
+2. **Inhalte** — siehe Baustein 9. Für das Malerhandwerk der unterschätzte Kanal.
+3. **Empfehlung.** Läuft ohne Technik, lässt sich aber unterstützen: wer hat
    empfohlen, und wurde sich bedankt.
-3. **Portale** wie MyHammer. Funktionieren, kosten Marge und liefern
-   preissensible Kundschaft.
-4. **LinkedIn** — nur B2B: Hausverwaltungen, Bauträger, Architekten. Größere,
+4. **Portale** wie MyHammer. Sofort wirksam, kosten Marge.
+5. **LinkedIn** — nur B2B: Hausverwaltungen, Bauträger, Architekten. Größere,
    wiederkehrende Aufträge, eigener Weg, nicht derselbe wie MyHammer.
+
+---
+
+## 4b. Baustein 9: Inhalte — aus Baustellen werden Beiträge
+
+### Warum das kein Marketing-Nebenthema ist
+
+Malerhandwerk ist eines der visuellsten Gewerke überhaupt. Spachteltechniken,
+Kalk- und Stuccoflächen, Beton-Optik, Wischtechnik: das sind Vorher-Nachher-Bilder,
+die ohne ein einziges Wort Erklärung funktionieren. Ein Meister, der so etwas
+kann, sitzt auf Material, für das andere Branchen Geld ausgeben.
+
+Der eigentliche Punkt liegt aber nicht in der Reichweite, sondern im Preis.
+
+**Inhalte sind keine Werbung, sie sind Preisverteidigung.** Wer über ein Portal
+anfragt, vergleicht drei Angebote und entscheidet nach der Zahl unten rechts. Wer
+eine Stuccowand in einem Video gesehen hat und *genau die* haben will, vergleicht
+nicht — er will den, der diese Wand gemacht hat. Damit wechselt der Betrieb den
+Markt: raus aus „Maler, der ein Angebot abgibt", rein in „der Mann für diese
+Oberflächen". Das ist der stärkste Hebel auf seine Marge, den es in diesem
+Katalog gibt — stärker als jede eingesparte Stunde.
+
+### Der Engpass ist das Rohmaterial, nicht die Produktion
+
+Schneiden, Untertiteln, Texte, Veröffentlichungsplan, auf Kommentare und
+Nachrichten antworten: das kann eine KI gut. Was sie nicht kann, ist das Handy
+hochhalten, während die Kelle über die Wand geht. Und ein Meister mit Spachtel in
+der Hand filmt nicht — dieselbe Adoptionsfalle wie beim Aufmaßzettel.
+
+**Die Auflösung liegt in Baustein 2.** Für die Baustellenaufnahme fotografiert er
+sowieso schon jedes Objekt — die Gewohnheit existiert also bereits. Der Baustein
+hängt sich daran, statt eine neue zu verlangen: aus „fotografier die Räume" wird
+„fotografier die Räume und schwenk zehn Sekunden drüber". Drei Aufnahmen pro
+Auftrag genügen: vorher, die Hand an der Wand, nachher. Zusammen unter einer
+Minute Drehzeit.
+
+Aus einem Auftrag entstehen daraus mehrere Beiträge über alle Plattformen. Aus
+zwölf Aufträgen ein Jahr Inhalt.
+
+### Was die KI macht — und was nicht
+
+**Macht sie:** Rohmaterial sortieren, Schnittvorschlag, Untertitel, Beschreibungstext
+und Hashtags, Veröffentlichungsplan, Antwortentwürfe auf Kommentare und
+Direktnachrichten, und aus einem Dreh mehrere Formate ableiten.
+
+**Macht sie nicht:** Aufnahmen erfinden, generierte Räume zeigen, oder in seinem
+Namen mit einer künstlichen Stimme sprechen. Der Wert liegt darin, dass die Wand
+echt ist und dass *er* sie gemacht hat. Synthetisches Material in einem
+Handwerkskanal beschädigt genau das, was laut Strategiepapier der eigentliche
+Vermögenswert ist: Vertrauen. Ein Publikum, das merkt, dass der Kanal nicht echt
+ist, ist schlimmer als kein Publikum.
+
+### Praktische Festlegungen
+
+- **Kurzformat zuerst.** Vertikale Clips laufen dort, wo Oberflächen-Handwerk
+  reist. Ein Dreh geht an alle Plattformen; YouTube bekommt dieselben Kurzvideos,
+  keine eigene Produktion. Langformat ist eine ganz andere
+  Aufwandsklasse — später, wenn überhaupt.
+- **Einwilligung.** Gedreht wird in Wohnungen von Kundschaft, oft mit
+  Mitarbeitern im Bild. Ein Satz in der Auftragsbestätigung regelt das; ohne
+  Einwilligung wird nicht veröffentlicht. Gesichter und Hausnummern sind kein
+  Beiwerk.
+- **Erwartung ehrlich halten.** Das ist ein Kanal mit langer Anlaufzeit — ein
+  halbes bis ganzes Jahr, bis verlässlich Anfragen daraus kommen. Er darf nie mit
+  „bringt dir nächsten Monat Kunden" verkauft werden. Er wird als Bestand
+  verkauft, der wächst.
+
+### Warnung für das Geschäftsmodell
+
+Dieser Baustein ist der, der am schnellsten zur Agentur wird. „Ich mache dein
+Marketing" heißt monatliche Betreuung, Abstimmungsschleifen und Erwartungen an
+Reichweite — ein anderes Geschäft mit anderer Arbeitslast. „Das System macht aus
+deinen Baustellen Beiträge, du gibst frei" bleibt Software. Die Grenze ist
+dieselbe wie im Strategiepapier zwischen Beratung und Produkt, und sie muss beim
+Verkauf klar gezogen werden.
 
 ## 5. Was ein Baustein erfüllen muss
 
@@ -191,3 +278,10 @@ Nichts davon vor dem Kundengespräch. Aber eine Frage lohnt sich dort zusätzlic
 
 Die Antwort entscheidet, ob Baustein 1 später überhaupt der richtige ist oder ob
 es die Bewertungen sind.
+
+Und eine zweite, für Baustein 9:
+
+> **Was ist die schönste Fläche, die du letztes Jahr gemacht hast — und hast du
+> ein Foto davon?** Wenn er anfängt zu erzählen und das Handy rausholt, ist der
+> Inhalte-Baustein verkauft, bevor er gebaut ist. Wenn er kein einziges Foto
+> findet, ist genau das das Problem, das zuerst gelöst werden muss.
