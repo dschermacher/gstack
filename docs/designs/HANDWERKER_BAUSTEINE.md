@@ -45,7 +45,7 @@ Die Reihenfolge ist echt: jeder Baustein füttert den nächsten mit Daten.
 
 | # | Baustein | Was er tut | Stand |
 |---|---|---|---|
-| 1 | **Auftrag rein** | Portale beobachten, Anfragen erkennen, Antwortentwurf vorlegen. Sichtbarkeit pflegen. | Idee |
+| 1 | **Anfragen-Mappe** | Quellen sichten, passende Anfragen vorlegen: Volumen aus eigenen Preisen, Kriterien, Antwortentwurf. Recherche abnehmen, Entscheidung nicht. | Idee — spezifiziert |
 | 2 | **Aufnahme** | Baustelle einmal erfassen: Zettelfoto, Bilder, Diktat → strukturierte Aufnahme. | in Arbeit (Phase 1) |
 | 3 | **Angebot** | Aus der Aufnahme kalkulieren, Angebots-PDF in seinem Layout. | geplant (Phase 2) |
 | 4 | **Nachfassen** | Angebote ohne Antwort nach 5 und 14 Tagen erinnern, mit fertigem Text. | Idee — siehe unten |
@@ -67,52 +67,98 @@ System sich bezahlt. **Das ist der Baustein, den ich vor Baustein 1 bauen würde
 
 ---
 
-## 4. Baustein 1 im Detail — und wo die Minen liegen
+## 4. Baustein 1 im Detail: die Anfragen-Mappe
 
-### Was sinnvoll ist
+### Der Auftrag an den Baustein
 
-- **Beobachten und vorsortieren.** Neue Anfragen erkennen, gegen sein Profil
-  filtern (Gewerk, Umkreis, Auftragsgröße), und nur die vorlegen, die passen.
-- **Antwortentwurf.** Aus der Anfrage einen Text vorschlagen, der zu seiner
-  Sprache passt und auf die genannten Details eingeht — statt Textbaustein.
-- **Reaktionszeit messbar machen.** Wie schnell antwortet er, und wie hängt das
-  mit der Zuschlagsquote zusammen. Das ist gleichzeitig der Beweis für den Wert.
+Der Bot **recherchiert und legt vor, er handelt nicht.** Er kennt das Profil des
+Betriebs (Gewerk, Umkreis, Zielauftragsgröße, was er nicht machen will), sichtet
+die Quellen und liefert eine Auflistung: worum es geht, geschätztes Volumen, was
+dafür und was dagegen spricht, was noch fehlt — plus einen fertigen
+Antwortentwurf. Der Meister überfliegt, wählt aus, drückt ab. Die Recherchearbeit
+ist ihm abgenommen, die Entscheidung nicht.
 
-### Was gefährlich ist
+Praktische Form: eine **Morgenmappe.** Eine Liste, sortiert nach erwartetem Wert,
+kurz genug für einen Kaffee.
 
-**Automatisch absenden.** Zwei Gründe, beide hart:
+### Was in eine Zeile gehört
 
-1. **Plattform-Regeln.** Portale untersagen in ihren Nutzungsbedingungen in der
-   Regel automatisierten Zugriff und Scraping. Fliegt der Account, ist nicht
-   Davids Werkzeug weg, sondern der Vertriebskanal seines Kunden. Vor jedem Bau
-   die AGB des konkreten Portals lesen und prüfen, ob es eine offizielle
-   Schnittstelle gibt — die ist immer der richtige Weg, auch wenn sie weniger
-   kann.
-2. **Schlechte Aufträge.** Ein Bot, der auf alles bietet, gewinnt vor allem das,
-   was andere liegen lassen. Die Auswahl ist der Wert, nicht die Geschwindigkeit.
+| Feld | Inhalt |
+|---|---|
+| Worum es geht | Zwei Sätze, aus der Anfrage destilliert — nicht der Originaltext |
+| Quelle und Alter | Woher, und wie lange sie schon offen ist (alt = viele Mitbewerber) |
+| Geschätztes Volumen | Grobe Spanne, gerechnet **mit seinen eigenen Preisen** |
+| Dafür / Dagegen | Die Kriterien im Klartext, jedes einzeln nachprüfbar |
+| Was fehlt | Was er beim ersten Anruf fragen muss, damit er kalkulieren kann |
+| Antwortentwurf | In seiner Sprache, auf die genannten Details eingehend |
 
-**Die Regel für diesen Baustein: die KI bereitet vor, der Mensch drückt ab.**
-Das ist nicht nur rechtlich sauberer, es ist auch das bessere Produkt.
+Das geschätzte Volumen ist der Punkt, an dem dieses System jedem generischen
+Werkzeug überlegen ist: sobald Baustein 3 steht, liegen seine Aufwandswerte und
+Preise im Vault. Aus „Wohnung, 80 m², streichen und Decken" wird dann eine Spanne
+aus *seiner* Kalkulation, nicht aus einer Branchentabelle. Bausteine, die
+aufeinander aufbauen, statt nebeneinanderher zu laufen.
+
+### Die Prozentzahl — hier liegt die Falle
+
+Eine Zuschlagswahrscheinlichkeit als Prozentwert war Teil der Idee. Genau die
+sollte am Anfang **nicht** ausgegeben werden.
+
+Eine frei geschätzte Zahl wirkt autoritativ, ohne es zu sein. „73 % Chance" liest
+sich wie Statistik, ist aber ein Sprachmodell, das eine plausibel klingende Zahl
+formt — und der Meister richtet seine Entscheidung danach aus. Das ist derselbe
+Fehler wie ein Angebot mit Durchschnittswerten aus dem Internet: es sieht
+professionell aus und ist falsch.
+
+Der saubere Weg, in zwei Stufen:
+
+1. **Am Anfang: nachprüfbare Kriterien statt Note.** Umkreis, Gewerk-Treffer,
+   Auftragsgröße im Zielband, Alter der Anfrage, Zahl der Mitbewerber (falls das
+   Portal sie zeigt), wie konkret die Beschreibung ist. Als sichtbare Liste, die
+   er selbst gegenlesen kann. Er kalibriert im Kopf, und das kann er besser als
+   jedes Modell — er ist Meister.
+2. **Später: seine echte Quote.** Wenn zu jeder Anfrage festgehalten ist, ob er
+   angeboten und ob er gewonnen hat, entsteht nach dreißig bis fünfzig Vorgängen
+   eine belastbare Zuschlagsquote je Kategorie. **Dann** darf eine Zahl dran, und
+   dann ist sie seine eigene.
+
+Das ist dieselbe Regel wie bei der Kalkulation, nur auf Anfragen angewandt:
+erst messen, dann schätzen. Und sie erklärt, warum Baustein 1 vom Anfang an
+mitschreiben muss, was aus jeder Anfrage geworden ist — sonst lernt er nie.
+
+### Wo die Minen liegen
+
+**Automatisiert absenden — nicht.** Zwei harte Gründe:
+
+1. **Plattform-Regeln.** Portale untersagen automatisierten Zugriff und Scraping
+   in ihren Nutzungsbedingungen üblicherweise. Fliegt der Account, ist nicht
+   Davids Werkzeug weg, sondern der Vertriebskanal seines Kunden. Vor dem Bau die
+   AGB des konkreten Portals lesen und prüfen, ob eine offizielle Schnittstelle
+   existiert — die ist immer der richtige Weg, auch wenn sie weniger kann. Reines
+   Vorlegen ohne Absenden entschärft das nicht automatisch: schon das
+   maschinelle Auslesen kann untersagt sein.
+2. **Schlechte Aufträge.** Wer auf alles bietet, gewinnt vor allem das, was
+   andere liegen lassen. Die Auswahl ist der Wert, nicht die Geschwindigkeit.
+
+**Fremde personenbezogene Daten.** In Anfragen stehen Namen und Adressen von
+Leuten, die mit dem Betrieb noch in keiner Beziehung stehen. Also: nur speichern,
+was für die Entscheidung nötig ist, und löschen, was nicht weiterverfolgt wird.
+Kein Sammelarchiv aus Verlegenheit.
 
 ### Korrektur zum Kanal
 
-LinkedIn ist für einen Malermeister der falsche Ort, jedenfalls für das
-Privatkundengeschäft — dort sitzen keine Hausbesitzer. Realistisch nach Wert
-sortiert:
+LinkedIn ist für einen Malermeister der falsche Ort, jedenfalls im
+Privatkundengeschäft — dort sitzen keine Hausbesitzer. Realistisch nach Wert:
 
 1. **Google-Unternehmensprofil und Bewertungen.** Für Handwerk der Kanal Nummer
-   eins. Wer bei "Maler + Ort" oben mit vierzig guten Bewertungen steht, braucht
+   eins. Wer bei „Maler + Ort" oben mit vierzig guten Bewertungen steht, braucht
    keine Portale. Ein Baustein, der nach jedem abgeschlossenen Auftrag um eine
    Bewertung bittet, ist billig zu bauen und wirkt jahrelang.
 2. **Empfehlung.** Läuft ohne Technik, lässt sich aber unterstützen: wer hat
    empfohlen, und wurde sich bedankt.
-3. **Portale** wie MyHammer. Funktionieren, kosten aber Marge und liefern
+3. **Portale** wie MyHammer. Funktionieren, kosten Marge und liefern
    preissensible Kundschaft.
-4. **LinkedIn** — nur für die B2B-Seite: Hausverwaltungen, Bauträger,
-   Architekten. Dort sind die Aufträge größer und wiederkehrend. Das ist ein
-   eigener, lohnender Weg, aber nicht derselbe wie MyHammer.
-
----
+4. **LinkedIn** — nur B2B: Hausverwaltungen, Bauträger, Architekten. Größere,
+   wiederkehrende Aufträge, eigener Weg, nicht derselbe wie MyHammer.
 
 ## 5. Was ein Baustein erfüllen muss
 
