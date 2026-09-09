@@ -1,0 +1,864 @@
+<title>Erstgespräch Malermeister</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root {
+    --paper:      #f6f7f4;
+    --panel:      #ffffff;
+    --grid:       #e2e6df;
+    --rule:       #cfd5cb;
+    --ink:        #1f2124;
+    --ink-mid:    #565c62;
+    --ink-faint:  #868d92;
+    --blau:       #1d4e6f;
+    --blau-soft:  #e8eff4;
+    --gruen:      #2f6b3a;
+    --gelb:       #8a6a12;
+    --rot:        #96342a;
+    --focus:      #1d4e6f;
+
+    --display: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+    --body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:     #15171a;
+      --panel:     #1c1f23;
+      --grid:      #23272c;
+      --rule:      #333940;
+      --ink:       #e7e9e6;
+      --ink-mid:   #a3aaaf;
+      --ink-faint: #757c82;
+      --blau:      #79b6dc;
+      --blau-soft: #16303f;
+      --gruen:     #7bbd86;
+      --gelb:      #d3ab4a;
+      --rot:       #e08578;
+      --focus:     #79b6dc;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:     #15171a;
+    --panel:     #1c1f23;
+    --grid:      #23272c;
+    --rule:      #333940;
+    --ink:       #e7e9e6;
+    --ink-mid:   #a3aaaf;
+    --ink-faint: #757c82;
+    --blau:      #79b6dc;
+    --blau-soft: #16303f;
+    --gruen:     #7bbd86;
+    --gelb:      #d3ab4a;
+    --rot:       #e08578;
+    --focus:     #79b6dc;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 26px 26px, 26px 26px;
+    background-position: -1px -1px, -1px -1px;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 20px 96px;
+  }
+
+  .wrap { max-width: 780px; margin: 0 auto; }
+
+  /* ---------- Kopf ---------- */
+  header.top { padding: 44px 0 24px; }
+  .eyebrow {
+    font-family: var(--display);
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--blau); margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(40px, 8vw, 62px);
+    font-weight: 700; line-height: 0.98; letter-spacing: -0.01em;
+    text-wrap: balance; margin: 0 0 18px;
+  }
+  .standfirst {
+    font-size: 19px; line-height: 1.5; color: var(--ink-mid);
+    max-width: 34em; margin: 0;
+  }
+  .standfirst b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Statusleiste ---------- */
+  .status {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 22px;
+    margin: 0 -20px; padding: 11px 20px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--rule);
+  }
+  .status .cell { display: flex; align-items: baseline; gap: 7px; }
+  .status .lab {
+    font-family: var(--display); font-size: 11.5px; font-weight: 600;
+    letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .status .val {
+    font-family: var(--mono); font-size: 14px; font-weight: 600;
+    font-variant-numeric: tabular-nums; color: var(--ink);
+  }
+  .status .val.blau { color: var(--blau); }
+  .status .spacer { flex: 1 1 auto; }
+  #saveState { font-family: var(--body); font-size: 13px; color: var(--ink-faint); font-weight: 400; }
+
+  .chip {
+    font-family: var(--display); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 9px; border: 1px solid currentColor; border-radius: 2px;
+  }
+  .chip.gruen { color: var(--gruen); }
+  .chip.gelb  { color: var(--gelb); }
+  .chip.rot   { color: var(--rot); }
+  .chip.off   { color: var(--ink-faint); }
+
+  /* ---------- Blöcke ---------- */
+  section { margin: 46px 0 0; }
+  .blocktitle { display: flex; align-items: baseline; gap: 14px; margin: 0 0 6px; }
+  .blocktitle .mark {
+    font-family: var(--display); font-size: 15px; font-weight: 700;
+    color: var(--blau); letter-spacing: 0.08em;
+    border: 1.5px solid var(--blau); border-radius: 2px;
+    padding: 1px 8px; flex: 0 0 auto;
+  }
+  h2 {
+    font-family: var(--display); font-size: 30px; font-weight: 600;
+    line-height: 1.1; letter-spacing: -0.005em; margin: 0; text-wrap: balance;
+  }
+  .blockintro { color: var(--ink-mid); margin: 8px 0 22px; max-width: 34em; }
+  .blockrule { height: 1px; background: var(--rule); margin: 10px 0 0; }
+
+  h3 {
+    font-family: var(--display); font-size: 20px; font-weight: 600;
+    margin: 0 0 8px; line-height: 1.2;
+  }
+
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ---------- Frage ---------- */
+  .q { margin: 0 0 26px; }
+  .q .ask { font-size: 17.5px; font-weight: 500; line-height: 1.45; margin: 0 0 6px; }
+  .q .why {
+    font-size: 14.5px; font-style: italic; color: var(--ink-mid);
+    margin: 0 0 10px; max-width: 36em;
+  }
+  textarea, input[type="number"] {
+    font-family: var(--body); font-size: 16px; line-height: 1.5;
+    color: var(--ink); background: var(--panel);
+    border: 1px solid var(--rule); border-radius: 3px;
+    padding: 10px 12px; width: 100%; display: block;
+    resize: vertical;
+  }
+  textarea { min-height: 74px; }
+  textarea::placeholder, input::placeholder { color: var(--ink-faint); }
+  textarea:focus-visible, input:focus-visible, button:focus-visible, label:focus-within {
+    outline: 2px solid var(--focus); outline-offset: 2px;
+  }
+
+  /* ---------- Regel-Panel ---------- */
+  .rules {
+    background: var(--blau-soft); border-left: 3px solid var(--blau);
+    padding: 20px 22px; margin: 30px 0 0;
+  }
+  .rules h3 { color: var(--blau); }
+  .rules ol { margin: 0; padding-left: 20px; display: grid; gap: 11px; }
+  .rules li::marker { color: var(--blau); font-weight: 600; }
+
+  /* ---------- Rechenpanel ---------- */
+  .calc {
+    background: var(--panel); border: 1.5px solid var(--blau);
+    padding: 20px 22px; margin: 8px 0 18px;
+  }
+  .calc .head {
+    font-family: var(--display); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--blau);
+    margin: 0 0 16px;
+  }
+  .calcrow {
+    display: flex; align-items: center; gap: 14px;
+    padding: 9px 0; border-bottom: 1px dotted var(--rule);
+  }
+  .calcrow:last-of-type { border-bottom: none; }
+  .calcrow .lbl { flex: 1 1 auto; font-size: 15.5px; }
+  .calcrow .unit { font-family: var(--mono); font-size: 13px; color: var(--ink-faint); }
+  .calcrow input[type="number"] { width: 128px; flex: 0 0 auto; text-align: right; font-family: var(--mono); }
+  .calcout {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+    padding: 11px 0; border-top: 1px solid var(--rule); margin-top: 4px;
+  }
+  .calcout .lbl { font-size: 15.5px; color: var(--ink-mid); }
+  .calcout .num {
+    font-family: var(--mono); font-size: 20px; font-weight: 600;
+    font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap;
+  }
+  .calcout.lead { border-top: 2px solid var(--blau); margin-top: 8px; padding-top: 14px; }
+  .calcout.lead .lbl { color: var(--ink); font-weight: 600; }
+  .calcout.lead .num { font-size: 27px; color: var(--blau); }
+  .calcnote { font-size: 14.5px; color: var(--ink-mid); margin: 12px 0 0; }
+
+  /* ---------- Auswahlkarten ---------- */
+  .choices { display: grid; gap: 10px; margin: 6px 0 16px; }
+  .choice {
+    display: grid; grid-template-columns: 22px 1fr; gap: 13px; align-items: start;
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 3px;
+    padding: 15px 17px; cursor: pointer;
+  }
+  .choice input { margin: 4px 0 0; accent-color: var(--blau); width: 17px; height: 17px; }
+  .choice .cl {
+    font-family: var(--display); font-size: 19px; font-weight: 600;
+    line-height: 1.2; margin: 0 0 4px; display: block;
+  }
+  .choice .cd { font-size: 15px; color: var(--ink-mid); line-height: 1.5; }
+  .choice.sel { border-color: var(--blau); border-width: 1.5px; background: var(--blau-soft); }
+  .choice.g .cl { color: var(--gruen); }
+  .choice.y .cl { color: var(--gelb); }
+  .choice.r .cl { color: var(--rot); }
+  .choice.g.sel { border-color: var(--gruen); }
+  .choice.y.sel { border-color: var(--gelb); }
+  .choice.r.sel { border-color: var(--rot); }
+
+  /* ---------- Mitnehmen-Liste ---------- */
+  .take { display: grid; gap: 2px; margin: 6px 0 0; }
+  .take label {
+    display: grid; grid-template-columns: 20px 1fr; gap: 13px; align-items: start;
+    padding: 10px 2px; cursor: pointer; border-bottom: 1px solid var(--rule);
+  }
+  .take label:last-child { border-bottom: none; }
+  .take input { margin: 5px 0 0; accent-color: var(--blau); width: 16px; height: 16px; }
+  .take .tt { font-weight: 500; }
+  .take .td { color: var(--ink-mid); font-size: 15px; }
+  .take label.done .tt, .take label.done .td { color: var(--ink-faint); text-decoration: line-through; }
+
+  /* ---------- Wortlaut ---------- */
+  .script {
+    border-left: 3px solid var(--blau); padding: 4px 0 4px 20px; margin: 18px 0;
+    font-size: 19px; line-height: 1.55;
+  }
+  .script p { margin-bottom: 12px; }
+  .warnbox {
+    border: 1px solid var(--rule); border-left: 3px solid var(--ink-faint);
+    background: var(--panel); padding: 16px 18px; margin: 18px 0 0;
+  }
+  .warnbox .wl {
+    font-family: var(--display); font-size: 12.5px; font-weight: 700;
+    letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint);
+    display: block; margin-bottom: 7px;
+  }
+
+  ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 10px; }
+  ul.plain li::marker { color: var(--blau); }
+
+  /* ---------- Fuß ---------- */
+  footer.end {
+    margin: 52px 0 0; padding: 24px 0 0; border-top: 1px solid var(--rule);
+    display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+  }
+  button {
+    font-family: var(--display); font-size: 16px; font-weight: 600;
+    letter-spacing: 0.03em;
+    background: var(--blau); color: var(--paper);
+    border: 1.5px solid var(--blau); border-radius: 3px;
+    padding: 10px 20px; cursor: pointer;
+  }
+  button.ghost { background: transparent; color: var(--blau); }
+  button:hover { opacity: 0.88; }
+  .endnote { font-size: 14.5px; color: var(--ink-faint); flex: 1 1 260px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  @media (max-width: 560px) {
+    body { padding: 0 15px 80px; }
+    .status { margin: 0 -15px; padding: 10px 15px; }
+    .calcrow { flex-wrap: wrap; }
+    .calcrow input[type="number"] { width: 100%; }
+  }
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Erstgespräch · Malermeister</p>
+  <h1>Die halbe Stunde,<br>die alles entscheidet</h1>
+  <p class="standfirst">Ziel sind <b>Zahlen, keine Meinungen.</b> Am Ende steht hier ein
+  Eurobetrag — und der ist dein Preis. Antworten direkt eintippen, das Blatt merkt sie sich.</p>
+</header>
+
+</div>
+
+<div class="status">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 22px;width:100%">
+    <span class="cell"><span class="lab">Beantwortet</span><span class="val" id="progress">0 / 12</span></span>
+    <span class="cell"><span class="lab">Preis / Monat</span><span class="val blau" id="statusPrice">—</span></span>
+    <span class="cell"><span class="lab">Ampel</span><span class="chip off" id="statusAmpel">offen</span></span>
+    <span class="spacer"></span>
+    <span id="saveState">nur auf diesem Gerät</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="rules">
+  <h3>Drei Regeln, bevor du losfährst</h3>
+  <ol>
+    <li><b>Du verkaufst nichts.</b> Kein Wort über das System, solange du fragst. Sobald er
+    weiß, was du bauen willst, gibt er dir höfliche Antworten statt echter.</li>
+    <li><b>Du schreibst mit.</b> Sichtbar. Das signalisiert: das hier ist ernst — und es
+    zwingt dich, nicht zu reden.</li>
+    <li><b>Bei „das wär ja praktisch" freust du dich nicht.</b> Du fragst nach: „Wann hat
+    dich das letzte Mal konkret Geld gekostet?" Begeisterung ist gratis, Zahlen nicht.</li>
+  </ol>
+</div>
+
+<section>
+  <div class="blocktitle"><span class="mark">A</span><h2>Wie es heute wirklich läuft</h2></div>
+  <p class="blockintro">Sein echter Wettbewerber ist nicht irgendeine Handwerkersoftware.
+  Es ist sein Zettel und sein Excel: kostenlos, funktionierend, seit fünfzehn Jahren vertraut.</p>
+  <div class="blockrule"></div>
+
+  <div class="q">
+    <p class="ask">Erzähl mir mal, was bei dir passiert, wenn jemand anruft und ein Angebot
+    will. Von dem Anruf bis das Angebot raus ist — Schritt für Schritt.</p>
+    <p class="why">Lass ihn reden, nicht unterbrechen. Hier erfährst du, wo die Zeit versickert.</p>
+    <textarea data-f="a1" placeholder="Seine Schritte, in seinen Worten …"></textarea>
+  </div>
+
+  <div class="q">
+    <p class="ask">Wie lange dauert das insgesamt? Und wann machst du es — abends, sonntags,
+    zwischen zwei Baustellen?</p>
+    <textarea data-f="a2" placeholder="Dauer und Tageszeit …"></textarea>
+  </div>
+
+  <div class="q">
+    <p class="ask">Womit rechnest du? Zettel, Excel, Word — oder hast du ein Programm?</p>
+    <p class="why">Falls Programm: welches, was kostet es, und was kann es nicht? Das ist
+    dein Wettbewerber — oder dein Preisanker.</p>
+    <textarea data-f="a3" placeholder="Werkzeug, Kosten, Lücken …"></textarea>
+  </div>
+
+  <div class="q">
+    <p class="ask">Machst du das alles selbst, oder hast du jemanden im Büro?</p>
+    <textarea data-f="a4" placeholder="Wer macht was …"></textarea>
+  </div>
+</section>
+
+<section>
+  <div class="blocktitle"><span class="mark">B</span><h2>Was die Lücke kostet</h2></div>
+  <p class="blockintro">Der wichtigste Block — hier entsteht dein Preis. Frag ruhig zweimal
+  nach, wenn er schätzt. Eine ungenaue Zahl ist besser als keine.</p>
+  <div class="blockrule"></div>
+
+  <div class="q">
+    <p class="ask">Erzähl mir vom letzten Auftrag, den ein anderer bekommen hat, weil er
+    schneller war.</p>
+    <p class="why">Eine Geschichte ist mehr wert als eine Zahl. Wenn er eine erzählt und
+    dabei sauer wird, hast du deinen Beweis.</p>
+    <textarea data-f="b1" placeholder="Die Geschichte, so wie er sie erzählt …"></textarea>
+  </div>
+
+  <div class="calc">
+    <p class="head">Rechnung — füll das erst nach dem Gespräch aus</p>
+
+    <div class="calcrow">
+      <span class="lbl">Anfragen letztes Jahr, grob geschätzt</span>
+      <input type="number" min="0" step="1" data-f="n_all" placeholder="—" aria-label="Anfragen letztes Jahr">
+      <span class="unit">Stk</span>
+    </div>
+    <div class="calcrow">
+      <span class="lbl">Davon nicht beantwortet oder zu spät</span>
+      <input type="number" min="0" step="1" data-f="n_lost" placeholder="—" aria-label="Verlorene Anfragen">
+      <span class="unit">Stk</span>
+    </div>
+    <div class="calcrow">
+      <span class="lbl">Was bleibt ihm an einem normalen Auftrag</span>
+      <input type="number" min="0" step="100" data-f="n_db" placeholder="—" aria-label="Deckungsbeitrag je Auftrag">
+      <span class="unit">€</span>
+    </div>
+
+    <div class="calcout"><span class="lbl">Entgangener Gewinn pro Jahr</span><span class="num" id="outYear">—</span></div>
+    <div class="calcout"><span class="lbl">Davon 10 – 20 % als Jahrespreis</span><span class="num" id="outRange">—</span></div>
+    <div class="calcout lead"><span class="lbl">Das nennst du: pro Monat</span><span class="num" id="outMonth">—</span></div>
+
+    <p class="calcnote">Diese Rechnung machst du allein im Auto, nicht vor ihm. Sonst wird es
+    eine Verhandlung, bevor du überhaupt zugeschnitten hast.</p>
+  </div>
+
+  <div class="q">
+    <p class="ask">Wann hat dich dein Steuerberater das letzte Mal gemahnt, und wegen was?</p>
+    <p class="why">Nebenfrage, die viel verrät — und dir sagt, ob Block „Belege" überhaupt zieht.</p>
+    <textarea data-f="b2" placeholder="Was der Steuerberater sagt …"></textarea>
+  </div>
+</section>
+
+<section>
+  <div class="blocktitle"><span class="mark">C</span><h2>Die eine Frage, die du nicht vergessen darfst</h2></div>
+  <p class="blockintro"><b>„Stell dir vor, du hättest ab nächstem Monat jeden Sonntag frei.
+  Was machst du damit?"</b> — Diese Antwort entscheidet, ob er zahlt, und aus welcher Tasche.</p>
+  <div class="blockrule"></div>
+
+  <div class="choices" id="sonntag" role="radiogroup" aria-label="Was macht er mit der freien Zeit">
+    <label class="choice g">
+      <input type="radio" name="sonntag" value="auftrag">
+      <span><span class="cl">Noch einen Auftrag annehmen</span>
+      <span class="cd">Bestlage. Zeit wird bei ihm zu Geld, er zahlt aus der Betriebskasse und
+      rechnet die Rendite selbst nach. Preis nach oben.</span></span>
+    </label>
+    <label class="choice y">
+      <input type="radio" name="sonntag" value="familie">
+      <span><span class="cl">Endlich Zeit für die Familie</span>
+      <span class="cd">Ehrlich, aber schwierig: er zahlt aus der privaten Tasche, und die ist
+      eng. Dann brauchst du zwingend auch die Zahlen aus Block B, sonst trägt es den Preis nicht.</span></span>
+    </label>
+    <label class="choice r">
+      <input type="radio" name="sonntag" value="unklar">
+      <span><span class="cl">Weiß nicht — anderes liegt auch</span>
+      <span class="cd">Warnsignal. Er merkt den Gewinn nicht und kündigt nach ein paar Monaten.
+      Dann verkauf nicht Zeit, sondern gewonnene Aufträge.</span></span>
+    </label>
+  </div>
+  <textarea data-f="c_note" placeholder="Was er wörtlich geantwortet hat …"></textarea>
+</section>
+
+<section>
+  <div class="blocktitle"><span class="mark">D</span><h2>Was du mitnehmen willst</h2></div>
+  <p class="blockintro">Frag am Ende, ob er dir das mitgibt. Es ist der Rohstoff für alles
+  Weitere — abhaken, was du wirklich in der Hand hast.</p>
+  <div class="blockrule"></div>
+
+  <div class="take">
+    <label><input type="checkbox" data-f="t1"><span><span class="tt">Drei bis fünf alte Angebote</span>
+      <span class="td"> — gewonnene und verlorene. Die verlorenen sind die interessantesten.</span></span></label>
+    <label><input type="checkbox" data-f="t2"><span><span class="tt">Zwei bis drei Schlussrechnungen</span>
+      <span class="td"> — zu Projekten, wo er weiß, wie lange es wirklich gedauert hat.</span></span></label>
+    <label><input type="checkbox" data-f="t3"><span><span class="tt">Fotos seiner Aufmaßzettel</span>
+      <span class="td"> — die echten, krakeligen. Am besten gleich seinen Block abfangen und zwei Seiten fotografieren.</span></span></label>
+    <label><input type="checkbox" data-f="t4"><span><span class="tt">Stundensätze und Zuschläge</span>
+      <span class="td"> — Meister, Geselle, Azubi, Materialaufschlag, Fahrtkosten, über Kopf, Gerüst, Wochenende.</span></span></label>
+    <label><input type="checkbox" data-f="t5"><span><span class="tt">Steuerberater-Setup</span>
+      <span class="td"> — welches Programm, und in welcher Form er die Belege abgibt.</span></span></label>
+  </div>
+</section>
+
+<section>
+  <div class="blocktitle"><span class="mark">E</span><h2>Das Geldgespräch</h2></div>
+  <p class="blockintro">Erst jetzt. Und fast wörtlich so:</p>
+  <div class="blockrule"></div>
+
+  <div class="script">
+    <p>„Ich bau dir das. Den Aufbau mach ich umsonst, weil du der Erste bist und ich daran
+    lerne. Das ist mir was wert.</p>
+    <p>Wenn es läuft und du sagst, es nimmt dir wirklich Arbeit ab, dann kostet es ab da X im
+    Monat. Wenn es dir nichts bringt, hörst du auf und es hat dich nichts gekostet.</p>
+    <p>Ist das fair?"</p>
+  </div>
+
+  <p>Du schenkst ihm den <b>Aufbau</b>, nicht den Preis. Ein Freundschaftspreis wäre das
+  Schlimmste — aus einem Gefallen wird nie ein Geschäft, weil du den späteren echten Preis
+  nie mehr durchsetzt. Er erinnert sich an die erste Zahl. Für immer.</p>
+
+  <div class="warnbox">
+    <span class="wl">Danach: auf das Verhalten achten, nicht auf die Worte</span>
+    <p>Nachdem du die Zahl gesagt hast, hör auf zu reden. Fragt er nach, wie abgerechnet wird,
+    ab wann, oder ob er kündigen kann — sehr gut, er rechnet. Sagt er „ja, passt" und wechselt
+    sofort das Thema, hat er nicht zugehört. Dann ist es noch ein Gefallen und keine Abmachung.</p>
+  </div>
+
+  <div class="q" style="margin-top:22px">
+    <p class="ask">Was hat er gemacht, als die Zahl auf dem Tisch lag?</p>
+    <textarea data-f="e1" placeholder="Reaktion, Rückfragen, Körpersprache …"></textarea>
+  </div>
+</section>
+
+<section>
+  <div class="blocktitle"><span class="mark">F</span><h2>Was du auf keinen Fall machst</h2></div>
+  <div class="blockrule"></div>
+  <ul class="plain" style="margin-top:20px">
+    <li><b>Das System vorführen, bevor du gefragt hast.</b> Danach sind seine Antworten
+    wertlos — er beschreibt dann dein Produkt, nicht seinen Alltag. Die Systemvorstellung
+    gibst du ihm am Ende.</li>
+    <li><b>Ihm die Antworten in den Mund legen.</b> „Das nervt bestimmt, oder?" ist keine
+    Frage, das ist eine Vorlage zum Nicken.</li>
+    <li><b>Funktionen versprechen.</b> Alles, was du im Gespräch zusagst, ist später geschuldet.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="blocktitle"><span class="mark">G</span><h2>Hinterher, im Auto: Ampel ziehen</h2></div>
+  <p class="blockintro">Eine Entscheidung, drei Möglichkeiten. Wähle die, die zu dem passt,
+  was du gehört hast — nicht die, die du hören wolltest.</p>
+  <div class="blockrule"></div>
+
+  <div class="choices" id="ampel" role="radiogroup" aria-label="Ergebnis des Gesprächs">
+    <label class="choice g">
+      <input type="radio" name="ampel" value="gruen">
+      <span><span class="cl">Grün — bauen</span>
+      <span class="cd">Er nennt eine Zahl verlorener Anfragen. Er erzählt eine Geschichte und
+      wird dabei sauer. Er fragt selbst, wann es losgeht. Die Unterlagen gibt er sofort mit.
+      → Phase 1 starten, Preis aus Block B ansetzen.</span></span>
+    </label>
+    <label class="choice y">
+      <input type="radio" name="ampel" value="gelb">
+      <span><span class="cl">Gelb — klein anfangen</span>
+      <span class="cd">Er beklagt sich, aber ohne Zahlen. Oder er hat ein Programm und ist
+      eigentlich zufrieden. Oder die Unterlagen kommen „irgendwann".
+      → Nur die Baustellenaufnahme, ein einziges Projekt, zwei Wochen. Kein Preisgespräch, bis das läuft.</span></span>
+    </label>
+    <label class="choice r">
+      <input type="radio" name="ampel" value="rot">
+      <span><span class="cl">Rot — nicht für ihn bauen</span>
+      <span class="cd">Es stört ihn nicht wirklich. Die Bürokraft macht das. Er wechselt das Thema.
+      → Zwei andere Handwerksmeister mit demselben Bogen fragen. Er ist nicht dein Kunde — jemand anderes ist es.</span></span>
+    </label>
+  </div>
+
+  <div class="q" style="margin-top:20px">
+    <p class="ask">Was hat dich überrascht?</p>
+    <p class="why">Die wertvollste Zeile des ganzen Blattes. Wenn dich nichts überrascht hat,
+    hast du zu viel geredet.</p>
+    <textarea data-f="g1" placeholder="Das, womit du nicht gerechnet hast …"></textarea>
+  </div>
+</section>
+
+<footer class="end">
+  <button id="copyBtn">Zusammenfassung kopieren</button>
+  <button class="ghost" id="clearBtn">Blatt leeren</button>
+  <span class="endnote">Die Zusammenfassung kannst du in einen neuen Chat einfügen, um die
+  Diagnostik mit echten Antworten fortzusetzen.</span>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var FIELDS = ["a1","a2","a3","a4","b1","b2","c_note","e1","g1"];
+  var NUMS = ["n_all","n_lost","n_db"];
+  var CHECKS = ["t1","t2","t3","t4","t5"];
+  var LS_KEY = "erstgespraech-malermeister-v1";
+
+  var state = { sonntag: "", ampel: "" };
+  FIELDS.concat(NUMS).forEach(function (k) { state[k] = ""; });
+  CHECKS.forEach(function (k) { state[k] = false; });
+
+  var db = null;
+  var docRef = null;
+  var saveTimer = null;
+  var applying = false;
+  var saveEl = document.getElementById("saveState");
+
+  /* ---------- Anzeige ---------- */
+
+  var euro = new Intl.NumberFormat("de-DE", {
+    style: "currency", currency: "EUR", maximumFractionDigits: 0
+  });
+
+  function num(k) {
+    var v = parseFloat(state[k]);
+    return isFinite(v) && v >= 0 ? v : null;
+  }
+
+  function render() {
+    var lost = num("n_lost"), db_ = num("n_db");
+    var year = (lost !== null && db_ !== null) ? lost * db_ : null;
+
+    document.getElementById("outYear").textContent = year === null ? "—" : euro.format(year);
+    document.getElementById("outRange").textContent = year === null ? "—"
+      : euro.format(year * 0.10) + " – " + euro.format(year * 0.20);
+
+    var monthTxt = "—";
+    if (year !== null && year > 0) {
+      monthTxt = euro.format(year * 0.10 / 12) + " – " + euro.format(year * 0.20 / 12);
+    }
+    document.getElementById("outMonth").textContent = monthTxt;
+    document.getElementById("statusPrice").textContent = monthTxt;
+
+    var answered = 0;
+    FIELDS.forEach(function (k) { if (String(state[k]).trim()) answered++; });
+    NUMS.forEach(function (k) { if (num(k) !== null) answered++; });
+    document.getElementById("progress").textContent = answered + " / 12";
+
+    var chip = document.getElementById("statusAmpel");
+    var map = { gruen: ["gruen", "grün"], gelb: ["gelb", "gelb"], rot: ["rot", "rot"] };
+    var m = map[state.ampel];
+    chip.className = "chip " + (m ? m[0] : "off");
+    chip.textContent = m ? m[1] : "offen";
+
+    ["sonntag", "ampel"].forEach(function (group) {
+      var box = document.getElementById(group);
+      Array.prototype.forEach.call(box.querySelectorAll(".choice"), function (card) {
+        var input = card.querySelector("input");
+        card.classList.toggle("sel", input.checked);
+      });
+    });
+
+    CHECKS.forEach(function (k) {
+      var input = document.querySelector('[data-f="' + k + '"]');
+      if (input) input.closest("label").classList.toggle("done", input.checked);
+    });
+  }
+
+  /* ---------- Speichern ---------- */
+
+  function localSave() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) { /* privater Modus */ }
+  }
+
+  function localLoad() {
+    try {
+      var raw = localStorage.getItem(LS_KEY);
+      if (raw) Object.assign(state, JSON.parse(raw));
+    } catch (e) { /* nichts gespeichert */ }
+  }
+
+  function setSaveState(txt) { saveEl.textContent = txt; }
+
+  function persist() {
+    localSave();
+    if (!docRef) { setSaveState("nur auf diesem Gerät"); return; }
+    clearTimeout(saveTimer);
+    setSaveState("speichert …");
+    saveTimer = setTimeout(function () {
+      docRef.set(Object.assign({}, state, { updatedAt: new Date().toISOString() }))
+        .then(function () { setSaveState("gespeichert"); })
+        .catch(function (e) {
+          setSaveState(e && e.code === "revoked" ? "nur auf diesem Gerät" : "nicht gespeichert");
+        });
+    }, 900);
+  }
+
+  /* ---------- Formular an den Zustand binden ---------- */
+
+  function applyState() {
+    applying = true;
+    FIELDS.concat(NUMS).forEach(function (k) {
+      var el = document.querySelector('[data-f="' + k + '"]');
+      if (el) el.value = state[k] == null ? "" : state[k];
+    });
+    CHECKS.forEach(function (k) {
+      var el = document.querySelector('[data-f="' + k + '"]');
+      if (el) el.checked = !!state[k];
+    });
+    ["sonntag", "ampel"].forEach(function (group) {
+      var val = state[group];
+      Array.prototype.forEach.call(
+        document.querySelectorAll('input[name="' + group + '"]'),
+        function (r) { r.checked = (r.value === val); }
+      );
+    });
+    applying = false;
+    render();
+  }
+
+  function autoGrow(el) {
+    el.style.height = "auto";
+    el.style.height = Math.max(el.scrollHeight, 74) + "px";
+  }
+
+  FIELDS.forEach(function (k) {
+    var el = document.querySelector('[data-f="' + k + '"]');
+    if (!el) return;
+    el.addEventListener("input", function () {
+      autoGrow(el);
+      if (applying) return;
+      state[k] = el.value;
+      render();
+      persist();
+    });
+  });
+
+  NUMS.forEach(function (k) {
+    var el = document.querySelector('[data-f="' + k + '"]');
+    if (!el) return;
+    el.addEventListener("input", function () {
+      if (applying) return;
+      state[k] = el.value;
+      render();
+      persist();
+    });
+  });
+
+  CHECKS.forEach(function (k) {
+    var el = document.querySelector('[data-f="' + k + '"]');
+    if (!el) return;
+    el.addEventListener("change", function () {
+      if (applying) return;
+      state[k] = el.checked;
+      render();
+      persist();
+    });
+  });
+
+  ["sonntag", "ampel"].forEach(function (group) {
+    Array.prototype.forEach.call(
+      document.querySelectorAll('input[name="' + group + '"]'),
+      function (r) {
+        r.addEventListener("change", function () {
+          if (applying) return;
+          state[group] = r.value;
+          render();
+          persist();
+        });
+      }
+    );
+  });
+
+  /* ---------- Zusammenfassung ---------- */
+
+  var LABELS = {
+    a1: "Ablauf von der Anfrage bis zum Angebot",
+    a2: "Dauer und Tageszeit",
+    a3: "Werkzeug heute (Zettel / Excel / Programm)",
+    a4: "Wer macht das Büro",
+    b1: "Verlorener Auftrag, weil ein anderer schneller war",
+    b2: "Steuerberater — letzte Mahnung",
+    c_note: "Antwort auf die Sonntagsfrage, wörtlich",
+    e1: "Reaktion, als die Zahl auf dem Tisch lag",
+    g1: "Was mich überrascht hat"
+  };
+  var SONNTAG = {
+    auftrag: "Noch einen Auftrag annehmen (Zeit wird zu Geld, Betriebskasse)",
+    familie: "Zeit für die Familie (private Tasche, engeres Budget)",
+    unklar: "Weiß nicht / anderes liegt auch (Warnsignal)"
+  };
+  var AMPEL = {
+    gruen: "GRÜN — bauen, Phase 1 starten",
+    gelb: "GELB — klein anfangen, nur Baustellenaufnahme",
+    rot: "ROT — nicht für ihn bauen, andere Meister fragen"
+  };
+
+  function summary() {
+    var L = [];
+    L.push("# Erstgespräch Malermeister — Antworten");
+    L.push("");
+    L.push("Stand: " + new Date().toLocaleDateString("de-DE"));
+    L.push("");
+    L.push("## Wie es heute läuft");
+    ["a1","a2","a3","a4"].forEach(function (k) {
+      L.push("**" + LABELS[k] + ":** " + (String(state[k]).trim() || "— nicht beantwortet"));
+    });
+    L.push("");
+    L.push("## Was die Lücke kostet");
+    L.push("**" + LABELS.b1 + ":** " + (String(state.b1).trim() || "— nicht beantwortet"));
+    var lost = num("n_lost"), dbv = num("n_db"), all = num("n_all");
+    L.push("- Anfragen letztes Jahr: " + (all === null ? "—" : all));
+    L.push("- Davon verloren oder zu spät: " + (lost === null ? "—" : lost));
+    L.push("- Deckungsbeitrag je Auftrag: " + (dbv === null ? "—" : euro.format(dbv)));
+    if (lost !== null && dbv !== null) {
+      var y = lost * dbv;
+      L.push("- **Entgangener Gewinn pro Jahr: " + euro.format(y) + "**");
+      L.push("- Preisspanne (10–20 % davon): " + euro.format(y * 0.10) + " – " + euro.format(y * 0.20) + " pro Jahr");
+      L.push("- **Pro Monat: " + euro.format(y * 0.10 / 12) + " – " + euro.format(y * 0.20 / 12) + "**");
+    }
+    L.push("**" + LABELS.b2 + ":** " + (String(state.b2).trim() || "— nicht beantwortet"));
+    L.push("");
+    L.push("## Die Sonntagsfrage");
+    L.push("**Einordnung:** " + (SONNTAG[state.sonntag] || "— nicht gewählt"));
+    L.push("**" + LABELS.c_note + ":** " + (String(state.c_note).trim() || "— nicht notiert"));
+    L.push("");
+    L.push("## Unterlagen mitgenommen");
+    var TAKE = {
+      t1: "Alte Angebote (gewonnene und verlorene)",
+      t2: "Schlussrechnungen mit bekannter Ist-Dauer",
+      t3: "Fotos der Aufmaßzettel",
+      t4: "Stundensätze und Zuschläge",
+      t5: "Steuerberater-Setup"
+    };
+    CHECKS.forEach(function (k) { L.push("- [" + (state[k] ? "x" : " ") + "] " + TAKE[k]); });
+    L.push("");
+    L.push("## Geldgespräch");
+    L.push("**" + LABELS.e1 + ":** " + (String(state.e1).trim() || "— nicht beantwortet"));
+    L.push("");
+    L.push("## Ergebnis");
+    L.push("**Ampel:** " + (AMPEL[state.ampel] || "— nicht gezogen"));
+    L.push("**" + LABELS.g1 + ":** " + (String(state.g1).trim() || "— nichts notiert"));
+    L.push("");
+    L.push("---");
+    L.push("");
+    L.push("Setz die office-hours-Diagnostik mit diesen Antworten fort — Status quo, Kosten des");
+    L.push("Status quo, Zukunftsfähigkeit — und leite daraus einen Preis und den Zuschnitt der");
+    L.push("ersten Version ab.");
+    return L.join("\n");
+  }
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    var btn = this;
+    var text = summary();
+    var done = function (ok) {
+      btn.textContent = ok ? "Kopiert" : "Kopieren ging nicht";
+      setTimeout(function () { btn.textContent = "Zusammenfassung kopieren"; }, 2200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { fallback(); });
+    } else { fallback(); }
+
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      done(ok);
+    }
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    if (!window.confirm("Alle Antworten auf diesem Blatt löschen?")) return;
+    FIELDS.concat(NUMS).forEach(function (k) { state[k] = ""; });
+    CHECKS.forEach(function (k) { state[k] = false; });
+    state.sonntag = ""; state.ampel = "";
+    applyState();
+    Array.prototype.forEach.call(document.querySelectorAll("textarea"), autoGrow);
+    persist();
+  });
+
+  /* ---------- Start ---------- */
+
+  localLoad();
+  applyState();
+  Array.prototype.forEach.call(document.querySelectorAll("textarea"), autoGrow);
+
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("db").then(function (store) {
+      if (!store) return;
+      db = store;
+      docRef = db.doc("gespraeche/malermeister");
+      setSaveState("gespeichert");
+      docRef.onSnapshot(function (snap) {
+        if (!snap.exists) return;
+        var data = snap.data() || {};
+        if (snap.metadata && snap.metadata.hasPendingWrites) return;
+        var focused = document.activeElement;
+        var focusedKey = focused && focused.getAttribute ? focused.getAttribute("data-f") : null;
+        Object.keys(state).forEach(function (k) {
+          if (k === focusedKey) return;
+          if (Object.prototype.hasOwnProperty.call(data, k)) state[k] = data[k];
+        });
+        applyState();
+        Array.prototype.forEach.call(document.querySelectorAll("textarea"), autoGrow);
+        setSaveState("gespeichert");
+      }, function () {
+        docRef = null;
+        setSaveState("nur auf diesem Gerät");
+      });
+    }, function () { /* db nicht verfügbar — lokal reicht */ });
+  }
+})();
+</script>
